@@ -1,0 +1,15 @@
+Planning Mode Report
+
+Completed:
+- Initialize project structure and documentation
+- Lock architecture to React + Vite SPA
+- Align MVP scope across docs
+- Define and document full design token system
+- Scaffold React + Vite app in workspace root
+- Install and configure Tailwind CSS
+- Wire design tokens into Tailwind theme and global CSS
+
+Next Step:
+- Set up routing
+- Refine hero/about/case-study/contact sections with production content
+- Add section-level motion and responsive polish
