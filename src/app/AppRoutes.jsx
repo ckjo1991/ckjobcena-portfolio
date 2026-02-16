@@ -1,8 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom'
 import HomePage from '../features/home/HomePage'
-import ProjectCardVisual from '../features/projects/ProjectCardVisual'
-import { projectDetailContentByVariant, projects } from '../shared/data/portfolio-data'
+import { projectCaseStudiesById, projects } from '../shared/data/portfolio-data'
 import { useActiveSection } from '../shared/hooks/useActiveSection'
 import { useScrollReveal } from '../shared/hooks/useScrollReveal'
 import { useThemeMode } from '../shared/hooks/useThemeMode'
@@ -27,6 +26,16 @@ const sectionNavItems = [
 ]
 
 const sectionIds = sectionNavItems.map((item) => item.id)
+const caseStudySectionIds = [
+  'project-summary',
+  'problem-space',
+  'research-insights',
+  'design-exploration',
+  'solution-summary',
+  'final-design',
+  'outcomes',
+  'reflection-next-steps',
+]
 
 function SectionLink({ sectionId, className, children, onNavigate }) {
   const handleClick = (event) => {
@@ -230,12 +239,47 @@ function SinglePagePortfolio() {
   )
 }
 
+function CaseStudyMedia({ media, className = '' }) {
+  if (media?.type === 'image' && media.src) {
+    return (
+      <figure className={`case-study-media ${className}`}>
+        <img src={media.src} alt={media.alt ?? ''} loading="lazy" />
+      </figure>
+    )
+  }
+
+  return (
+    <div className={`case-study-media case-study-media--placeholder ${className}`} aria-hidden="true">
+      {media?.label ?? 'Media placeholder'}
+    </div>
+  )
+}
+
+function CaseStudyDetailSection({ sectionRef, revealStyle, children }) {
+  return (
+    <section
+      ref={sectionRef}
+      className="case-study-section scroll-reveal scroll-reveal--up"
+      data-scroll-reveal
+      style={revealStyle}
+    >
+      {children}
+    </section>
+  )
+}
+
 function ProjectPlaceholderPage() {
   const { projectId } = useParams()
   const project = projects.find((item) => item.id === projectId)
   const detailPageRef = useRef(null)
+  const sectionRefs = useRef({})
+  const [activeScrollSpySection, setActiveScrollSpySection] = useState('project-summary')
+  const [scrollSpyProgress, setScrollSpyProgress] = useState(0)
+  const [showScrollSpy, setShowScrollSpy] = useState(false)
 
   useLayoutEffect(() => {
+    sectionRefs.current = {}
+
     const root = document.documentElement
     const previousScrollBehavior = root.style.scrollBehavior
     root.style.scrollBehavior = 'auto'
@@ -253,13 +297,103 @@ function ProjectPlaceholderPage() {
 
   useScrollReveal(detailPageRef, projectId)
 
+  useEffect(() => {
+    const updateScrollSpyState = () => {
+      const activationOffset = Math.max(92, window.innerHeight * 0.28)
+      const activationY = window.scrollY + activationOffset
+
+      const summaryNode = sectionRefs.current['project-summary']
+      if (summaryNode) {
+        const isVisible = summaryNode.getBoundingClientRect().bottom <= activationOffset
+        setShowScrollSpy((previousState) => (previousState === isVisible ? previousState : isVisible))
+      }
+
+      let nextActiveSection = 'project-summary'
+      caseStudySectionIds.forEach((sectionId) => {
+        const sectionNode = sectionRefs.current[sectionId]
+        if (!sectionNode) return
+
+        const sectionTop = sectionNode.getBoundingClientRect().top + window.scrollY
+        if (activationY >= sectionTop - 8) {
+          nextActiveSection = sectionId
+        }
+      })
+
+      setActiveScrollSpySection((previousState) =>
+        previousState === nextActiveSection ? previousState : nextActiveSection,
+      )
+
+      const firstSectionNode = sectionRefs.current[caseStudySectionIds[0]]
+      const lastSectionNode =
+        sectionRefs.current[caseStudySectionIds[caseStudySectionIds.length - 1]]
+
+      if (!firstSectionNode || !lastSectionNode) return
+
+      const firstSectionTop = firstSectionNode.getBoundingClientRect().top + window.scrollY
+      const lastSectionBottom = lastSectionNode.getBoundingClientRect().bottom + window.scrollY
+      const totalScrollableDistance = Math.max(lastSectionBottom - firstSectionTop, 1)
+      const nextProgress = Math.min(
+        1,
+        Math.max(0, (activationY - firstSectionTop) / totalScrollableDistance),
+      )
+
+      setScrollSpyProgress((previousState) =>
+        Math.abs(previousState - nextProgress) < 0.001 ? previousState : nextProgress,
+      )
+    }
+
+    const rafId = window.requestAnimationFrame(updateScrollSpyState)
+    window.addEventListener('scroll', updateScrollSpyState, { passive: true })
+    window.addEventListener('resize', updateScrollSpyState)
+
+    return () => {
+      window.cancelAnimationFrame(rafId)
+      window.removeEventListener('scroll', updateScrollSpyState)
+      window.removeEventListener('resize', updateScrollSpyState)
+    }
+  }, [projectId])
+
   if (!project) {
     return <Navigate replace to="/" />
   }
 
-  const detail = projectDetailContentByVariant[project.variant] ?? projectDetailContentByVariant.insights
+  const fallbackProjectId = projects[0]?.id
+  const detail =
+    projectCaseStudiesById[project.id] ??
+    (fallbackProjectId ? projectCaseStudiesById[fallbackProjectId] : null)
+
+  if (!detail) {
+    return <Navigate replace to="/" />
+  }
+
   const projectIndex = projects.findIndex((item) => item.id === project.id)
   const nextProject = projects[(projectIndex + 1) % projects.length]
+  const revealStyle = (index) => ({ '--reveal-delay': revealDelay(index) })
+  const setSectionRef = (sectionId) => (node) => {
+    if (node) {
+      sectionRefs.current[sectionId] = node
+      return
+    }
+
+    delete sectionRefs.current[sectionId]
+  }
+  const scrollSpyItems = [
+    { id: 'project-summary', label: 'Project Summary' },
+    { id: 'problem-space', label: 'Problem Space' },
+    { id: 'research-insights', label: 'Research and Insights' },
+    { id: 'design-exploration', label: 'Design Exploration' },
+    { id: 'solution-summary', label: 'Solution Summary' },
+    { id: 'final-design', label: 'Final Design' },
+    { id: 'outcomes', label: 'Outcomes' },
+    { id: 'reflection-next-steps', label: 'Reflection and Next Steps' },
+  ]
+
+  const handleScrollSpyNavigate = (sectionId) => {
+    const sectionNode = sectionRefs.current[sectionId]
+    if (sectionNode) {
+      sectionNode.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
 
   return (
     <AppShell
@@ -272,146 +406,205 @@ function ProjectPlaceholderPage() {
       <section
         key={projectId}
         ref={detailPageRef}
-        className={`project-detail-page project-detail-page--${project.variant} mx-auto max-w-wide pt-1 pb-7`}
+        className="case-study-page mx-auto max-w-wide pt-1 pb-7"
       >
         <section
-          className="project-detail-section project-detail-section--plain scroll-reveal scroll-reveal--up mt-0"
+          className="case-study-top-grid scroll-reveal scroll-reveal--up"
           data-scroll-reveal
-          style={{ '--reveal-delay': revealDelay(1) }}
+          style={revealStyle(1)}
         >
-          <h2 className="text-h3 text-text-primary">Project Context</h2>
-          <div className="project-detail-context mt-3">
-            {detail.context.map((item, index) => (
-              <div
-                key={item.label}
-                className="project-detail-context__item scroll-reveal scroll-reveal--up"
-                data-scroll-reveal
-                style={{ '--reveal-delay': revealDelay(index + 2) }}
-              >
-                <p className="project-detail-context__label">{item.label}</p>
-                <p className="project-detail-context__value">{item.value}</p>
+          <div className="case-study-main-column">
+            <h1 className="case-study-title text-h2 text-text-primary">{project.title}</h1>
+            <p className="case-study-subtitle text-body-lg text-text-secondary">{detail.subtitle}</p>
+            <CaseStudyMedia media={detail.headerMedia} className="case-study-media--hero" />
+
+            <CaseStudyDetailSection
+              sectionRef={setSectionRef('project-summary')}
+              revealStyle={revealStyle(2)}
+            >
+              <p className="case-study-kicker">Project Summary</p>
+              <p className="case-study-paragraph text-body text-text-secondary">{detail.summary}</p>
+            </CaseStudyDetailSection>
+          </div>
+
+          <aside className="case-study-side-column">
+            <div className="case-study-meta-card">
+              {detail.meta.map((item) => (
+                <div key={item.label} className="case-study-meta-item">
+                  <p className="case-study-meta-label">{item.label}</p>
+                  <p className="case-study-meta-value">{item.value}</p>
+                </div>
+              ))}
+            </div>
+          </aside>
+        </section>
+
+        <hr className="case-study-divider" />
+
+        <aside className={`case-study-scrollspy ${showScrollSpy ? 'is-visible' : ''}`}>
+          <div className="case-study-scrollspy__progress" aria-hidden="true">
+            <span className="case-study-scrollspy__progress-track" />
+            <span
+              className="case-study-scrollspy__progress-fill"
+              style={{ height: `${Math.max(2, scrollSpyProgress * 100)}%` }}
+            />
+          </div>
+          <nav className="case-study-scrollspy__nav" aria-label="Case study section navigation">
+            {scrollSpyItems.map((item) => {
+              const isActive = activeScrollSpySection === item.id
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  className={`case-study-scrollspy__item ${isActive ? 'is-active' : ''}`}
+                  onClick={() => handleScrollSpyNavigate(item.id)}
+                >
+                  <span className="case-study-scrollspy__dot" aria-hidden="true" />
+                  <span className="case-study-scrollspy__label">{item.label}</span>
+                </button>
+              )
+            })}
+          </nav>
+        </aside>
+
+        <CaseStudyDetailSection sectionRef={setSectionRef('problem-space')} revealStyle={revealStyle(3)}>
+          <p className="case-study-kicker">Problem Space</p>
+          <h2 className="case-study-panel-title text-h3 text-text-primary">{detail.problemSpace.title}</h2>
+          <p className="case-study-paragraph text-body text-text-secondary">{detail.problemSpace.intro}</p>
+          <ul className="case-study-list">
+            {detail.problemSpace.points.map((point) => (
+              <li key={point}>{point}</li>
+            ))}
+          </ul>
+          <div className="case-study-callout">{detail.problemSpace.callout}</div>
+        </CaseStudyDetailSection>
+
+        <CaseStudyDetailSection sectionRef={setSectionRef('research-insights')} revealStyle={revealStyle(4)}>
+          <p className="case-study-kicker">Research and Insights</p>
+          <h2 className="case-study-panel-title text-h3 text-text-primary">{detail.researchInsights.title}</h2>
+          <p className="case-study-paragraph text-body text-text-secondary">
+            {detail.researchInsights.intro}
+          </p>
+
+          <h3 className="case-study-subheading text-text-primary">Approach</h3>
+          <ul className="case-study-list">
+            {detail.researchInsights.approach.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+
+          <h3 className="case-study-subheading text-text-primary">Key Findings</h3>
+          <ul className="case-study-list">
+            {detail.researchInsights.findings.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+
+          <div className="case-study-callout">
+            <strong>Core Insight:</strong> {detail.researchInsights.coreInsight}
+          </div>
+        </CaseStudyDetailSection>
+
+        <CaseStudyDetailSection sectionRef={setSectionRef('design-exploration')} revealStyle={revealStyle(5)}>
+          <p className="case-study-kicker">Design Exploration</p>
+          <h2 className="case-study-panel-title text-h3 text-text-primary">{detail.designExploration.title}</h2>
+          <div className="case-study-callout">
+            Guiding question: {detail.designExploration.guidingQuestion}
+          </div>
+
+          <h3 className="case-study-subheading text-text-primary">Sketching</h3>
+          <p className="case-study-paragraph text-body text-text-secondary">
+            {detail.designExploration.sketching.body}
+          </p>
+          <CaseStudyMedia
+            media={detail.designExploration.sketching.media}
+            className="case-study-media--process"
+          />
+          <ul className="case-study-list">
+            {detail.designExploration.sketching.points.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+
+          <h3 className="case-study-subheading text-text-primary">Wireframes</h3>
+          <p className="case-study-paragraph text-body text-text-secondary">
+            {detail.designExploration.wireframes.body}
+          </p>
+          <CaseStudyMedia
+            media={detail.designExploration.wireframes.media}
+            className="case-study-media--process"
+          />
+
+          <h3 className="case-study-subheading text-text-primary">Prototyping</h3>
+          <p className="case-study-paragraph text-body text-text-secondary">
+            {detail.designExploration.prototyping.body}
+          </p>
+          <CaseStudyMedia
+            media={detail.designExploration.prototyping.media}
+            className="case-study-media--process"
+          />
+        </CaseStudyDetailSection>
+
+        <CaseStudyDetailSection sectionRef={setSectionRef('solution-summary')} revealStyle={revealStyle(6)}>
+          <p className="case-study-kicker">Solution Summary</p>
+          <h2 className="case-study-panel-title text-h3 text-text-primary">{detail.solutionSummary.title}</h2>
+          {detail.solutionSummary.points.map((point) => (
+            <div key={point.title} className="case-study-solution-item">
+              <h3 className="case-study-subheading text-text-primary">{point.title}</h3>
+              <p className="case-study-paragraph text-body text-text-secondary">{point.description}</p>
+            </div>
+          ))}
+        </CaseStudyDetailSection>
+
+        <CaseStudyDetailSection sectionRef={setSectionRef('final-design')} revealStyle={revealStyle(7)}>
+          <p className="case-study-kicker">Final Design</p>
+          <h2 className="case-study-panel-title text-h3 text-text-primary">{detail.finalDesign.title}</h2>
+          <div className="case-study-gallery-grid">
+            {detail.finalDesign.screens.map((screen) => (
+              <div key={screen.label} className="case-study-gallery-item">
+                <CaseStudyMedia media={screen.media} className="case-study-media--gallery" />
               </div>
             ))}
           </div>
-        </section>
+        </CaseStudyDetailSection>
 
-        <article
-          className="project-detail-hero scroll-reveal scroll-reveal--up rounded-lg border border-border-subtle bg-surface-700 p-4 md:p-5"
-          data-scroll-reveal
-          style={{ '--reveal-delay': revealDelay(1) }}
-        >
-          <div
-            className="project-detail-hero__copy scroll-reveal scroll-reveal--up"
-            data-scroll-reveal
-            style={{ '--reveal-delay': revealDelay(2) }}
-          >
-            <p className="project-detail-hero__eyebrow text-small uppercase tracking-[0.12em] text-accent-500">
-              {detail.heroLabel}
-            </p>
-            <h1 className="mt-2 text-h2 text-text-primary">{project.title}</h1>
-            <p className="mt-2 max-w-[66ch] text-body-lg text-text-secondary">{detail.heroLead}</p>
-          </div>
-          <div
-            className="project-detail-hero__visual project-placeholder-card__visual scroll-reveal scroll-reveal--right"
-            aria-hidden="true"
-            data-scroll-reveal
-            style={{ '--reveal-delay': revealDelay(3) }}
-          >
-            <div className="project-placeholder-card__fog" />
-            <ProjectCardVisual variant={project.variant} />
-          </div>
-        </article>
-
-        <section
-          className="project-detail-section scroll-reveal scroll-reveal--up mt-4"
-          data-scroll-reveal
-          style={{ '--reveal-delay': revealDelay(2) }}
-        >
-          <h2 className="text-h3 text-text-primary">Problem Space</h2>
-          <ul className="project-detail-list mt-3">
-            {detail.problemPoints.map((point, index) => (
-              <li
-                key={point}
-                className="scroll-reveal scroll-reveal--up"
-                data-scroll-reveal
-                style={{ '--reveal-delay': revealDelay(index + 3) }}
-              >
-                {point}
+        <CaseStudyDetailSection sectionRef={setSectionRef('outcomes')} revealStyle={revealStyle(8)}>
+          <p className="case-study-kicker">Outcomes</p>
+          <h2 className="case-study-panel-title text-h3 text-text-primary">{detail.outcomes.title}</h2>
+          <p className="case-study-paragraph text-body text-text-secondary">{detail.outcomes.intro}</p>
+          <ul className="case-study-list">
+            {detail.outcomes.points.map((point) => (
+              <li key={point.label}>
+                <strong>{point.label}:</strong> {point.description}
               </li>
             ))}
           </ul>
-        </section>
+          <div className="case-study-callout">{detail.outcomes.callout}</div>
+        </CaseStudyDetailSection>
 
-        {detail.solutionHighlights?.length ? (
-          <section
-            className="project-detail-section scroll-reveal scroll-reveal--up mt-4"
-            data-scroll-reveal
-            style={{ '--reveal-delay': revealDelay(2) }}
-          >
-            <h2 className="text-h3 text-text-primary">Solution Highlights</h2>
-            <ul className="project-detail-list mt-3">
-              {detail.solutionHighlights.map((point, index) => (
-                <li
-                  key={point}
-                  className="scroll-reveal scroll-reveal--up"
-                  data-scroll-reveal
-                  style={{ '--reveal-delay': revealDelay(index + 3) }}
-                >
-                  {point}
-                </li>
-              ))}
-            </ul>
-          </section>
-        ) : null}
-
-        <section
-          className="project-detail-section scroll-reveal scroll-reveal--up mt-4"
-          data-scroll-reveal
-          style={{ '--reveal-delay': revealDelay(2) }}
+        <CaseStudyDetailSection
+          sectionRef={setSectionRef('reflection-next-steps')}
+          revealStyle={revealStyle(9)}
         >
-          <h2 className="text-h3 text-text-primary">Process</h2>
-          <div className="project-detail-process mt-3">
-            {detail.processSteps.map((step, index) => (
-              <article
-                key={step.title}
-                className="project-detail-process__step scroll-reveal scroll-reveal--up"
-                data-scroll-reveal
-                style={{ '--reveal-delay': revealDelay(index + 3) }}
-              >
-                <p className="project-detail-process__title">{step.title}</p>
-                <p className="project-detail-process__description">{step.description}</p>
-              </article>
+          <p className="case-study-kicker">Reflection and Next Steps</p>
+          <h2 className="case-study-panel-title text-h3 text-text-primary">{detail.reflection.title}</h2>
+          <p className="case-study-paragraph text-body text-text-secondary">{detail.reflection.intro}</p>
+          <h3 className="case-study-subheading text-text-primary">If continued further, I would</h3>
+          <ul className="case-study-list">
+            {detail.reflection.nextSteps.map((step) => (
+              <li key={step}>{step}</li>
             ))}
-          </div>
-        </section>
+          </ul>
+          <div className="case-study-footer-note">{detail.reflection.note}</div>
+        </CaseStudyDetailSection>
 
-        <section
-          className="project-detail-section scroll-reveal scroll-reveal--up mt-4"
+        <div
+          className="case-study-actions scroll-reveal scroll-reveal--up"
           data-scroll-reveal
-          style={{ '--reveal-delay': revealDelay(3) }}
+          style={revealStyle(10)}
         >
-          <h2 className="text-h3 text-text-primary">Outcomes</h2>
-          <div className="project-detail-outcomes mt-3">
-            {detail.outcomes.map((outcome, index) => (
-              <article
-                key={outcome.label}
-                className="project-detail-outcomes__item scroll-reveal scroll-reveal--up"
-                data-scroll-reveal
-                style={{ '--reveal-delay': revealDelay(index + 3) }}
-              >
-                <p className="project-detail-outcomes__metric">{outcome.metric}</p>
-                <p className="project-detail-outcomes__label">{outcome.label}</p>
-              </article>
-            ))}
-          </div>
-        </section>
-
-        {detail.prototypeHref ? (
-          <div
-            className="scroll-reveal scroll-reveal--up mt-4"
-            data-scroll-reveal
-            style={{ '--reveal-delay': revealDelay(3) }}
-          >
+          {detail.prototypeHref ? (
             <a
               href={detail.prototypeHref}
               target="_blank"
@@ -420,14 +613,8 @@ function ProjectPlaceholderPage() {
             >
               {detail.prototypeLabel ?? 'View Prototype'}
             </a>
-          </div>
-        ) : null}
+          ) : null}
 
-        <div
-          className="scroll-reveal scroll-reveal--up mt-4"
-          data-scroll-reveal
-          style={{ '--reveal-delay': revealDelay(3) }}
-        >
           <Link
             to={nextProject.href}
             className="project-detail-next inline-flex min-h-[var(--button-size-md)] rounded-md bg-[var(--color-cta-bg)] px-[var(--button-padding-x)] py-[var(--button-padding-y)] font-medium text-[var(--color-cta-text)] transition-colors duration-base ease-standard hover:bg-[var(--color-cta-hover-bg)]"

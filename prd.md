@@ -32,6 +32,8 @@ clean.
 - Icon-first navigation that expands from icon-only to icon+label on hover/focus
 - Navigation links that scroll to section anchors (`#hero`, `#projects-preview`, `#about-preview`, `#contact-me`)
 - Project previews that lead each case-study entry
+- Structured case-study detail pages on `/projects/:projectId` with narrative sections (summary, problem, research, exploration, solution, outcomes, reflection)
+- Project detail pages include a sticky right-side scrollspy section navigation with active-section state and a vertical progress indicator (appears after Project Summary)
 - Layered project preview visuals prepared for optional parallax enhancement
 
 ## Out of Scope (Post-MVP)
@@ -84,15 +86,41 @@ clean.
   --font-heading: "Space Grotesk", sans-serif;
   --font-body: "Inter", sans-serif;
 
-  --text-h1: 88px;
-  --text-h2: 48px;
-  --text-h3: 32px;
-  --text-body-lg: 18px;
-  --text-body: 16px;
-  --text-small: 14px;
+  --text-h1-mobile: 40px;
+  --text-h1-tablet: 58px;
+  --text-h1-desktop: 84px;
+  --text-h2-mobile: 30px;
+  --text-h2-tablet: 38px;
+  --text-h2-desktop: 48px;
+  --text-h3-mobile: 22px;
+  --text-h3-tablet: 28px;
+  --text-h3-desktop: 32px;
+  --text-body-lg-mobile: 16px;
+  --text-body-lg-tablet: 17px;
+  --text-body-lg-desktop: 18px;
+  --text-body-mobile: 16px;
+  --text-body-tablet: 16px;
+  --text-body-desktop: 16px;
+  --text-small-mobile: 14px;
+  --text-small-tablet: 14px;
+  --text-small-desktop: 14px;
 
-  --leading-heading: 1.15;
-  --leading-body: 1.6;
+  --text-h1: var(--text-h1-mobile);
+  --text-h2: var(--text-h2-mobile);
+  --text-h3: var(--text-h3-mobile);
+  --text-body-lg: var(--text-body-lg-mobile);
+  --text-body: var(--text-body-mobile);
+  --text-small: var(--text-small-mobile);
+
+  --leading-heading-mobile: 1.16;
+  --leading-heading-tablet: 1.14;
+  --leading-heading-desktop: 1.12;
+  --leading-body-mobile: 1.65;
+  --leading-body-tablet: 1.62;
+  --leading-body-desktop: 1.6;
+
+  --leading-heading: var(--leading-heading-mobile);
+  --leading-body: var(--leading-body-mobile);
 
   /* Spacing (8pt) */
   --space-1: 8px;
@@ -144,6 +172,32 @@ clean.
   --breakpoint-md: 768px;
   --breakpoint-lg: 1024px;
   --breakpoint-xl: 1280px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --text-h1: var(--text-h1-tablet);
+    --text-h2: var(--text-h2-tablet);
+    --text-h3: var(--text-h3-tablet);
+    --text-body-lg: var(--text-body-lg-tablet);
+    --text-body: var(--text-body-tablet);
+    --text-small: var(--text-small-tablet);
+    --leading-heading: var(--leading-heading-tablet);
+    --leading-body: var(--leading-body-tablet);
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --text-h1: var(--text-h1-desktop);
+    --text-h2: var(--text-h2-desktop);
+    --text-h3: var(--text-h3-desktop);
+    --text-body-lg: var(--text-body-lg-desktop);
+    --text-body: var(--text-body-desktop);
+    --text-small: var(--text-small-desktop);
+    --leading-heading: var(--leading-heading-desktop);
+    --leading-body: var(--leading-body-desktop);
+  }
 }
 ```
 
@@ -219,11 +273,13 @@ clean.
 - No responsive breakage at defined breakpoints.
 - Accessibility baseline reaches WCAG 2.1 AA expectations.
 - Project Preview section clearly presents preview-first case studies with consistent narrative structure.
+- Clicked project cards open detail pages with consistent long-form structure and responsive behavior.
+- Detail pages expose a sticky right-side scrollspy after Project Summary, with active-section highlighting and vertical progress feedback.
 - Navigation expansion and section-anchor scrolling are functional on desktop and gracefully adapted on mobile.
 
 ## Future Considerations
 
 - CMS integration
-- Deeper case-study expansion pages
+- CMS-driven case-study authoring and deeper expansion variants
 - Enhanced offline strategy
 - Additional motion treatments

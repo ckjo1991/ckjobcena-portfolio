@@ -7,7 +7,8 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Foundation setup complete: Vite baseline, Tailwind config, token mapping, and routing.
 - MVP single-page sections implemented on `/`:
   hero, projects preview, about preview, and contact.
-- Placeholder project detail pages are available via dynamic route.
+- Project detail pages now render a full structured case-study layout after a project preview card click.
+- Project detail pages now include a right-side sticky scrollspy with active-section highlight and vertical progress (appears after Project Summary).
 - Floating section navigation is implemented with active-section tracking.
 - Navigation active state now auto-recovers if smooth-scroll is interrupted before reaching the target section.
 - Reveal stagger delays now use duration-only motion tokens for valid token-driven timing.
@@ -18,7 +19,9 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Brand mark is integrated from `public/ck.svg` as an icon-only shell element.
 - CSS spacing/layout values are normalized to the 8pt scale for component spacing.
 - Section reveal and shell entrance motion timing now uses transition tokens (`--transition-fast/base/slow`).
-- Hero heading now uses typography tokens (`text-h3`/`text-h2`/`text-h1`) instead of hardcoded px sizes.
+- Typography now uses responsive tokens for mobile/tablet/desktop (`h1`, `h2`, `h3`, `body-lg`, `body`, `small`).
+- Hero heading now uses semantic `text-h1` with token-driven scaling across breakpoints.
+- Responsive typography values were tuned for smoother size jumps and better mobile readability.
 
 ## Tech Stack
 
@@ -60,7 +63,7 @@ SITE_URL=https://your-domain.com npm run sitemap
 ## Routes
 
 - `/` (single-page anchored sections)
-- `/projects/:projectId` (placeholder case-study detail page)
+- `/projects/:projectId` (structured case-study detail page)
 
 ## SEO Files
 

@@ -194,7 +194,7 @@ function HomePage() {
           data-scroll-reveal
           style={{ '--reveal-delay': revealDelay(1) }}
         >
-          <h1 className="text-h3 leading-[var(--leading-heading)] text-text-primary md:text-h2 lg:text-h1">
+          <h1 className="text-h1 text-text-primary">
             UX Designer With An Analytics Background
           </h1>
           <p className="max-w-[52ch] text-body-lg text-text-secondary">
@@ -253,10 +253,14 @@ function HomePage() {
             data-scroll-reveal
           >
             <h2 className="text-h2 text-text-primary">About me</h2>
-            <p className="max-w-[64ch] text-body-lg text-text-secondary lg:mx-auto">
-              I work on messy, real world problems and turn them into clear, usable systems. My
-              analytics background helps me measure what works and design with evidence, not
-              guesswork.
+            <p className="max-w-[64ch] text-body-lg text-text-secondary lg:mx-auto lg:max-w-none">
+              <span className="lg:block lg:whitespace-nowrap">
+                I work on messy, real world problems and turn them into clear, usable systems.
+              </span>
+              <span className="lg:block lg:whitespace-nowrap">
+                My analytics background helps me measure what works and design with evidence, not
+                guesswork.
+              </span>
             </p>
           </div>
 

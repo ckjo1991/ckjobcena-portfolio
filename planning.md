@@ -72,9 +72,13 @@ Implementation status:
 - Reveal delay now composes from duration-only transition tokens for valid CSS delay math.
 - Theme preference persistence now safely degrades when storage access is blocked.
 - Case-study mobile controls now react to viewport breakpoint changes without stale state.
+- Typography tokens now scale across mobile/tablet/desktop breakpoints for headings and body text.
+- Typography scale values are tuned for smoother breakpoint progression and mobile legibility.
 - Route composition is centralized in `src/app/AppRoutes.jsx`.
 - Shared data/hooks/icons are extracted under `src/shared/`.
 - Home and project visual UI are extracted under `src/features/`.
+- `/projects/:projectId` now renders a structured long-form case-study layout (top meta grid, problem/insight/exploration/solution/outcomes/reflection sections) while leaving the home preview section unchanged.
+- Case-study detail pages on `/projects/:projectId` now use a sticky right-side scrollspy with active section tracking and vertical progress after the Project Summary section.
 
 ## Hero and Case Study Blueprint
 
@@ -106,7 +110,7 @@ Implementation status:
 - `AppShell`: owns floating navigation layout and page padding offsets.
 - `ProjectPlaceholderCard`: reusable preview card used in the Project Preview section.
 - `useActiveSection`: tracks visible section for nav highlight state.
-- Case study data shape includes preview metadata (title, category, year, summary, variant, href).
+- Case study data shape now includes preview metadata plus full detail-page section content keyed by project id.
 
 ## Brand Asset Plan
 

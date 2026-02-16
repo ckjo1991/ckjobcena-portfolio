@@ -22,6 +22,9 @@
 - [x] Render active nav icons as solid style while keeping inactive icons as outline
 - [x] Prevent stale active-nav state when smooth-scroll is interrupted mid-navigation
 - [x] Implement project preview-first case study layout
+- [x] Replace clicked-project detail route with structured long-form case-study pages (without changing the home preview section)
+- [x] Add sticky right-side scrollspy navigation on project detail pages (visible after Project Summary)
+- [x] Add active-section highlighting and vertical progress indicator to case-study scrollspy
 - [ ] Add scroll parallax layers inside project preview visuals
 - [x] Apply `public/ck.svg` brand mark in app shell
 - [x] Update `ck.svg` background to token yellow and use icon-only app shell badge
@@ -37,6 +40,8 @@
 - [x] Route reveal/shell motion timing through transition tokens (`--transition-fast/base/slow`)
 - [x] Ensure reveal-delay math uses duration-only motion tokens (valid CSS delay values)
 - [x] Replace hardcoded hero heading sizes with typography tokens
+- [x] Build responsive typography tokens for mobile/tablet/desktop (`h1`, `h2`, `h3`, `body-lg`, `body`, `small`)
+- [x] Tune responsive typography values for smoother breakpoint scaling and improved mobile readability
 - [x] Guard theme persistence for storage-restricted environments
 - [x] Make case-study mobile controls reactive to viewport breakpoint changes
 
