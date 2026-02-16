@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #0f172a;
+        background:
+          radial-gradient(1200px 600px at 15% -20%, rgba(148, 163, 184, 0.2), rgba(148, 163, 184, 0)),
+          linear-gradient(180deg, #f4f6fa 0%, #edf1f7 100%);
+      }
+
+      .resume-page {
+        min-height: 100vh;
+        padding: 24px;
+      }
+
+      .resume-shell {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 30px;
+        border-radius: 16px;
+        border: 1px solid #d7dee9;
+        background: #ffffff;
+        box-shadow: 0 14px 36px rgba(15, 23, 42, 0.08);
+      }
+
+      .resume-hero {
+        margin-bottom: 24px;
+        padding: 8px 4px 20px;
+        border-bottom: 1px solid #e2e8f0;
+      }
+
+      .resume-title-row {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 16px;
+      }
+
+      .resume-name {
+        margin: 0;
+        font-size: clamp(2rem, 4.2vw, 2.8rem);
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+      }
+
+      .resume-role {
+        margin: 8px 0 0;
+        color: #475569;
+        font-size: clamp(1rem, 2.1vw, 1.2rem);
+        font-weight: 600;
+      }
+
+      .resume-contact-list {
+        list-style: none;
+        margin: 14px 0 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 10px;
+      }
+
+      .resume-contact-list li {
+        display: inline-flex;
+        align-items: center;
+        min-height: 36px;
+        padding: 7px 10px;
+        border-radius: 999px;
+        border: 1px solid #dbe2ec;
+        background: #f8fafc;
+        color: #334155;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      .resume-section {
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #ffffff;
+        padding: 20px;
+        margin-bottom: 14px;
+      }
+
+      .resume-section:last-child {
+        margin-bottom: 0;
+      }
+
+      .resume-section h2 {
+        margin: 0 0 12px;
+        font-size: 1.2rem;
+        letter-spacing: -0.01em;
+      }
+
+      .resume-intro {
+        max-width: 74ch;
+        margin: 0;
+        color: #334155;
+        font-size: 1rem;
+        line-height: 1.72;
+      }
+
+      .resume-entries {
+        display: grid;
+        gap: 12px;
+      }
+
+      .resume-entry {
+        border: 1px solid #e5eaf1;
+        border-radius: 12px;
+        background: #f8fafc;
+      }
+
+      .resume-entry summary {
+        list-style: none;
+        cursor: pointer;
+        display: grid;
+        gap: 4px;
+        padding: 14px 42px 14px 14px;
+        position: relative;
+      }
+
+      .resume-entry summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .resume-entry summary:hover {
+        background: #f3f6fb;
+      }
+
+      .resume-entry[open] summary {
+        border-bottom: 1px solid #dbe2ec;
+        background: #f3f6fb;
+      }
+
+      .resume-entry-toggle {
+        position: absolute;
+        right: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 26px;
+        height: 26px;
+        border-radius: 999px;
+        border: 1px solid #cbd5e1;
+        color: #334155;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+      }
+
+      .resume-entry-toggle::before {
+        content: "+";
+      }
+
+      .resume-entry[open] .resume-entry-toggle::before {
+        content: "-";
+      }
+
+      .resume-entry-role {
+        font-size: 1.06rem;
+        letter-spacing: -0.01em;
+        font-weight: 700;
+        color: #111827;
+      }
+
+      .resume-meta {
+        margin-top: 2px;
+        color: #334155;
+        font-size: 0.94rem;
+        line-height: 1.55;
+      }
+
+      .resume-entry-details {
+        padding: 0 14px 14px;
+      }
+
+      .resume-list {
+        margin: 12px 0 0;
+        padding-left: 18px;
+        display: grid;
+        gap: 7px;
+      }
+
+      .resume-list li {
+        color: #334155;
+        line-height: 1.6;
+      }
+
+      .resume-more-toggle {
+        margin: 12px auto 0;
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        justify-content: center;
+        min-height: 34px;
+        padding: 6px 12px;
+        border: 1px solid #cbd5e1;
+        border-radius: 999px;
+        background: #ffffff;
+        color: #374151;
+        font-size: 0.82rem;
+        font-weight: 600;
+        line-height: 1;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+      }
+
+      .resume-more-toggle:hover {
+        background: #f8fafc;
+      }
+
+      .resume-more-content {
+        width: 100%;
+        display: grid;
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .resume-skills-chips {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .resume-skill-chip {
+        display: inline-flex;
+        align-items: center;
+        min-height: 38px;
+        padding: 8px 12px;
+        border: 1px solid #d1d9e6;
+        border-radius: 999px;
+        background: #f8fafc;
+        color: #1f2937;
+        font-size: 0.9rem;
+        font-weight: 500;
+        line-height: 1.4;
+      }
+
+      @media (max-width: 768px) {
+        .resume-page {
+          padding: 12px;
+        }
+
+        .resume-shell {
+          padding: 16px;
+          border-radius: 12px;
+        }
+
+        .resume-hero {
+          padding: 2px 0 14px;
+          margin-bottom: 16px;
+        }
+
+        .resume-name {
+          font-size: clamp(1.7rem, 8vw, 2rem);
+        }
+
+        .resume-title-row {
+          gap: 10px;
+        }
+
+        .resume-contact-list li {
+          font-size: 0.84rem;
+          min-height: 34px;
+          padding: 6px 9px;
+        }
+
+        .resume-section {
+          padding: 14px;
+          border-radius: 10px;
+        }
+
+        .resume-entry summary {
+          padding: 12px 38px 12px 12px;
+        }
+
+        .resume-entry-toggle {
+          right: 12px;
+          width: 24px;
+          height: 24px;
+        }
+
+        .resume-entry-details {
+          padding: 0 12px 12px;
+        }
+
+        .resume-skill-chip {
+          min-height: 34px;
+          padding: 7px 10px;
+          font-size: 0.84rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="resume-page">
+      <section class="resume-shell" aria-labelledby="resume-title">
+        <header class="resume-hero">
+          <div class="resume-title-row">
+            <h1 id="resume-title" class="resume-name">CK Obcena</h1>
+          </div>
+          <p class="resume-role">Junior UX Designer</p>
+          <ul class="resume-contact-list">
+            <li>+63 926 6305280</li>
+            <li>ckjobcena@gmail.com</li>
+            <li>Cubao, Quezon City</li>
+          </ul>
+        </header>
+
+        <section class="resume-section" aria-labelledby="resume-about">
+          <h2 id="resume-about">About me</h2>
+          <p class="resume-intro">
+            Confident and results-driven professional with 5+ years in customer service and workforce management, with a strong focus on real-time analysis in call centers. Now eager to channel my data insights into UI/UX design, combining a people-first approach with data-driven design decisions. Ready to bring a unique perspective to creating seamless, user-centered experiences.
+          </p>
+        </section>
+
+        <section class="resume-section" aria-labelledby="resume-education">
+          <h2 id="resume-education">Education</h2>
+          <div class="resume-entries">
+            <article class="resume-entry">
+              <details open>
+                <summary>
+                  <span class="resume-entry-role">UI/UX Designs Essential</span>
+                  <span class="resume-meta">CIIT College of Arts and Technology</span>
+                  <span class="resume-meta">Specialist</span>
+                  <span class="resume-meta">Aug 2024 - Oct 2024</span>
+                  <span class="resume-entry-toggle" aria-hidden="true"></span>
+                </summary>
+              </details>
+            </article>
+            <article class="resume-entry">
+              <details open>
+                <summary>
+                  <span class="resume-entry-role">BS Information Technology</span>
+                  <span class="resume-meta">University of the East</span>
+                  <span class="resume-meta">Undergraduate</span>
+                  <span class="resume-meta">2007 - 2009</span>
+                  <span class="resume-entry-toggle" aria-hidden="true"></span>
+                </summary>
+              </details>
+            </article>
+          </div>
+        </section>
+
+        <section class="resume-section" aria-labelledby="resume-experience">
+          <h2 id="resume-experience">Experience</h2>
+          <div class="resume-entries">
+            <details class="resume-entry">
+              <summary>
+                <span class="resume-entry-role">Junior UX Designer</span>
+                <span class="resume-meta">Ingnius Systems</span>
+                <span class="resume-meta">January 2025 to November 2025</span>
+                <span class="resume-entry-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="resume-entry-details">
+                <ul class="resume-list">
+                  <li>Work with the product designer to brainstorm and plan new feature ideas.</li>
+                  <li>Create wireframes, mock-ups, and prototypes for both new and current products.</li>
+                  <li>Improve designs based on what users say and do.</li>
+                  <li>Keep design specs and system docs up to date.</li>
+                  <li>Explain design choices clearly using data and insights.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="resume-entry">
+              <summary>
+                <span class="resume-entry-role">UI Designer</span>
+                <span class="resume-meta">Freelance</span>
+                <span class="resume-meta">November 2024 to December 2024</span>
+                <span class="resume-entry-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="resume-entry-details">
+                <ul class="resume-list">
+                  <li>Designed detailed UI mock-ups that captured the platform's key workflows.</li>
+                  <li>Built interactive prototypes to demonstrate how users would navigate core services.</li>
+                  <li>Focused on intuitive interactions to make the platform easy to use.</li>
+                  <li>Ensured that every design decision supported business goals without compromising usability.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="resume-entry">
+              <summary>
+                <span class="resume-entry-role">Real-Time Analyst</span>
+                <span class="resume-meta">BroadPath</span>
+                <span class="resume-meta">December 2022 to July 2024</span>
+                <span class="resume-entry-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="resume-entry-details">
+                <ul class="resume-list">
+                  <li>Monitor and analyze real-time data to ensure optimal performance in meeting business objectives.</li>
+                  <li>Generate timely reports and provide insights to support informed decision-making.</li>
+                  <li>Collaborate with operations to address challenges, implement improvements, and achieve performance targets.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+
+          <div id="older-experience-list" class="resume-more-content" hidden>
+            <details class="resume-entry">
+              <summary>
+                <span class="resume-entry-role">Associate Real-time Management</span>
+                <span class="resume-meta">Concentrix</span>
+                <span class="resume-meta">January 2022 to November 2022</span>
+                <span class="resume-entry-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="resume-entry-details">
+                <ul class="resume-list">
+                  <li>Gives an overview of the business where the target of the business is visible.</li>
+                  <li>Generating reports to help management in making decisions that are critical to the business.</li>
+                  <li>Working closely with operations, to help monitor the incoming volumes and ensure that client targets are achieved.</li>
+                  <li>Recognize and communicate challenges and areas of improvement during and after scheduling cycles, then provide staffing solutions at interval level.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="resume-entry">
+              <summary>
+                <span class="resume-entry-role">Client Services Coordinator</span>
+                <span class="resume-meta">Satellite Office</span>
+                <span class="resume-meta">June 2021 to October 2021</span>
+                <span class="resume-entry-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="resume-entry-details">
+                <ul class="resume-list">
+                  <li>Provided customized merchandise solutions to clients.</li>
+                  <li>Created presentation decks using MS PowerPoint and Canva.</li>
+                  <li>Engaged in ideation and sourcing as integral parts of delivering client solutions.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="resume-entry">
+              <summary>
+                <span class="resume-entry-role">Reporting Analyst</span>
+                <span class="resume-meta">Sutherland Global Services</span>
+                <span class="resume-meta">March 2019 to May 2021</span>
+                <span class="resume-entry-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="resume-entry-details">
+                <ul class="resume-list">
+                  <li>Designed and generated daily comprehensive reports offering an overview of the entire business.</li>
+                  <li>Delivered analytical solutions-based suggestions to assist in critical business decision-making.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="resume-entry">
+              <summary>
+                <span class="resume-entry-role">Real-Time Analyst</span>
+                <span class="resume-meta">Stellar Philippines Inc.</span>
+                <span class="resume-meta">October 2016 to March 2019</span>
+                <span class="resume-entry-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="resume-entry-details">
+                <ul class="resume-list">
+                  <li>Designed and generated daily transparent standard reports.</li>
+                  <li>Provided analytical suggestions for critical business decisions.</li>
+                  <li>Collaborated with operations to enhance real-time processes and performance.</li>
+                  <li>Contributed to team efficiency through proactive problem-solving.</li>
+                  <li>Ensured accurate and timely communication of data insights to relevant stakeholders.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="resume-entry">
+              <summary>
+                <span class="resume-entry-role">Travel Specialist</span>
+                <span class="resume-meta">Stellar Philippines Inc.</span>
+                <span class="resume-meta">June 2013 to October 2016</span>
+                <span class="resume-entry-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="resume-entry-details">
+                <ul class="resume-list">
+                  <li>Managed travel arrangements for groups, couples, executives, and special needs clients.</li>
+                  <li>Maintained a high level of customer satisfaction through efficient services.</li>
+                  <li>Responded promptly to client questions, issues, and complaints, providing effective solutions.</li>
+                  <li>Addressed inquiries and resolved issues related to travel arrangements.</li>
+                  <li>Conducted thorough research on destinations for accurate and up-to-date itineraries.</li>
+                </ul>
+              </div>
+            </details>
+
+            <details class="resume-entry">
+              <summary>
+                <span class="resume-entry-role">Data Encoder</span>
+                <span class="resume-meta">Sykes Inc.</span>
+                <span class="resume-meta">March 2010 to April 2011</span>
+                <span class="resume-entry-toggle" aria-hidden="true"></span>
+              </summary>
+              <div class="resume-entry-details">
+                <ul class="resume-list">
+                  <li>Detected and rectified data entry errors, preventing duplication across systems.</li>
+                  <li>Reviewed and updated account information within the company system.</li>
+                  <li>Identified, corrected, and reported data entry errors, ensuring data accuracy and integrity.</li>
+                </ul>
+              </div>
+            </details>
+          </div>
+
+          <button type="button" id="resume-more-toggle" class="resume-more-toggle" aria-expanded="false" aria-controls="older-experience-list">
+            Show more
+          </button>
+        </section>
+
+        <section class="resume-section" aria-labelledby="resume-skills">
+          <h2 id="resume-skills">Skills</h2>
+          <ul class="resume-skills-chips">
+            <li class="resume-skill-chip">Real-Time Analysis for Decision-Making</li>
+            <li class="resume-skill-chip">Data Management and Accuracy</li>
+            <li class="resume-skill-chip">Multitasking and Critical Thinking</li>
+            <li class="resume-skill-chip">Problem Solving</li>
+            <li class="resume-skill-chip">Effective Communication</li>
+            <li class="resume-skill-chip">Prototyping and Interactions</li>
+            <li class="resume-skill-chip">Plugins and Integrations</li>
+            <li class="resume-skill-chip">User Experience (UX) Research and Wireframing</li>
+          </ul>
+        </section>
+      </section>
+    </main>
+
+    <script>
+      const olderList = document.getElementById("older-experience-list");
+      const toggle = document.getElementById("resume-more-toggle");
+
+      const setExpanded = (expanded) => {
+        toggle.setAttribute("aria-expanded", String(expanded));
+        toggle.textContent = expanded ? "Show fewer roles" : "Show more";
+        olderList.hidden = !expanded;
+      };
+
+      setExpanded(false);
+
+      toggle.addEventListener("click", () => {
+        const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+        setExpanded(!isExpanded);
+      });
+    </script>
+  </body>
+</html>

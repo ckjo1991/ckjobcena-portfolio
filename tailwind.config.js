@@ -43,6 +43,7 @@ export default {
         h2: ['var(--text-h2)', { lineHeight: 'var(--leading-heading)' }],
         h3: ['var(--text-h3)', { lineHeight: 'var(--leading-heading)' }],
         'body-lg': ['var(--text-body-lg)', { lineHeight: 'var(--leading-body)' }],
+        'body-m': ['var(--text-body)', { lineHeight: 'var(--leading-body)' }],
         body: ['var(--text-body)', { lineHeight: 'var(--leading-body)' }],
         small: ['var(--text-small)', { lineHeight: 'var(--leading-body)' }],
       },

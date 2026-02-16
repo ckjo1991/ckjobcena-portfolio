@@ -3,9 +3,9 @@
 ## Executive Summary
 
 This project is a premium portfolio built as a React + Vite SPA with a
-dark visual system and yellow-led accents. The MVP focuses on six
-outcomes only: a strong hero, about section, three case studies, contact
-section, smooth transitions, and reliable responsive behavior.
+dark visual system and yellow-led accents. The MVP centers on a
+single-page flow with four anchored sections: Hero, Project Preview,
+About Preview, and Contact Me.
 
 ## Problem
 
@@ -23,12 +23,16 @@ clean.
 
 ## MVP Scope
 
-- Landing hero section with strong motion
-- About section
-- Three strong case studies
-- Contact section
+- Hero section
+- Project Preview section with three case-study cards
+- About Preview section
+- Contact Me section
 - Smooth transitions between sections
 - Responsive behavior that does not break
+- Icon-first navigation that expands from icon-only to icon+label on hover/focus
+- Navigation links that scroll to section anchors (`#hero`, `#projects-preview`, `#about-preview`, `#contact-me`)
+- Project previews that lead each case-study entry
+- Layered project preview visuals prepared for optional parallax enhancement
 
 ## Out of Scope (Post-MVP)
 
@@ -41,11 +45,15 @@ clean.
 - React.js
 - Vite
 - Tailwind CSS
-- React Router with deep linking
+- React Router with hash-based section deep linking on `/`
+- Feature-based source organization (`src/app`, `src/features`, `src/shared`, `src/styles`)
 - Semantic HTML and accessible interactions
 - WCAG 2.1 AA baseline
 - 12-column grid discipline for layout
 - Cross-browser smoke checks on current Chrome, Safari, and Firefox
+- `prefers-reduced-motion` handling for all non-essential motion
+- Theme preference persistence must fail safely when storage APIs are unavailable
+- Brand mark served from `public/ck.svg` and reused via `/ck.svg` path
 
 ## Design Tokens (Source of Truth)
 
@@ -95,6 +103,9 @@ clean.
   --space-6: 64px;
   --space-7: 96px;
   --space-8: 128px;
+  --button-size-md: 40px;
+  --button-padding-y: 8px;
+  --button-padding-x: 16px;
 
   /* Radius and elevation */
   --radius-sm: 6px;
@@ -158,18 +169,48 @@ clean.
 
 ### Case Studies (Repeatable Pattern)
 
-1. Full-width visual section (`--container-wide`)
-2. Centered text block (`--container-narrow`) with:
-   Problem, Approach, Constraints, Impact
-3. Two-column breakdown (6/6)
-4. Outcome metrics or reflection
+1. Preview-first case study card with expressive visual area
+2. Supporting narrative block with Problem, Approach, Constraints, Impact
+3. Two-column desktop composition (text 5/12, preview 7/12) with alternating card direction
+4. Quick-read impact statement without leaving the single-page flow
+
+### Navigation Pattern
+
+- Navigation is fixed and follows the viewer through all page sections.
+- Desktop behavior starts with icon-only items and expands each item to icon+label on hover/focus.
+- Mobile behavior uses a compact bottom navigation treatment.
+- Active section state is visible in navigation styling.
+- Active nav items must use a solid icon style; inactive items use outline icons.
+- Mobile active nav item must present full text label without truncation.
+- Mobile active label visibility should use explicit show/hide rules rather than only opacity transforms.
+- Mobile nav wrapper must remove desktop `right` anchoring and size to content so items do not render outside.
+- Mobile nav should enforce viewport-aware width limits (`max-width`) on wrapper and active chip.
+- Active section lock should recover automatically if smooth-scroll navigation is interrupted before target arrival.
+- App shell brand badge uses `public/ck.svg` with yellow token background and no adjacent text label.
+- App shell brand badge should render as a plain icon (no extra border/background container).
+- Desktop placement: floating navigation aligns to the right; brand badge is fixed near top-left.
+- Brand badge render size is fixed at `48px x 48px` to match desktop nav-link footprint.
+- Provide a subtle bottom-right CTA to toggle dark/light theme without disrupting primary navigation.
+
+### Sitemap
+
+1. `/` with section anchors:
+   `#hero`
+   `#projects-preview`
+   `#about-preview`
+   `#contact-me`
 
 ## Motion Rules
 
 - Animate containers and section groups, not every small element.
 - Keep easing/timing consistent using motion tokens.
+- Use token-derived delay steps for staggered reveals rather than hardcoded millisecond values (compose from duration-only motion tokens).
 - Preferred pattern: section fade + translateY with controlled text
   stagger.
+- Project preview visuals should support optional layered parallax tied to scroll position.
+- If enabled, parallax layers should move at different speeds and stay subtle enough to preserve readability.
+- Reduced-motion users should receive static previews without parallax transforms.
+- Theme toggle should preserve contrast and readability in both dark and light modes.
 
 ## Success Criteria
 
@@ -177,6 +218,8 @@ clean.
 - Navigation and section transitions feel smooth and coherent.
 - No responsive breakage at defined breakpoints.
 - Accessibility baseline reaches WCAG 2.1 AA expectations.
+- Project Preview section clearly presents preview-first case studies with consistent narrative structure.
+- Navigation expansion and section-anchor scrolling are functional on desktop and gracefully adapted on mobile.
 
 ## Future Considerations
 
