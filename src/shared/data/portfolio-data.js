@@ -235,8 +235,8 @@ export const projectCaseStudiesById = {
         'Balancing efficiency with familiarity proved critical. The goal was not to redesign Angkas, but to help users get moving faster.',
     },
     prototypeHref:
-      'https://www.figma.com/proto/fsxMk1XgYf1UPaWUBiMHyh/ANGKAS---Redesign?page-id=50%3A485&node-id=1199-14175&node-type=frame&viewport=4147%2C3009%2C0.52&t=ftzzPFslgHVZr5vA-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1199%3A14175&show-proto-sidebar=1',
-    prototypeLabel: 'View Interactive Prototype',
+      'https://www.figma.com/proto/4Iq53MltARwPSCyCkvzPch/FAST-by-CK?page-id=2%3A16&node-id=1109-2466&node-type=frame&viewport=846%2C1340%2C0.25&t=1XtpC4y8sXM7V8vO-9&scaling=scale-down&content-scaling=fixed&starting-point-node-id=1109%3A2466&show-proto-sidebar=1',
+    prototypeLabel: 'Open Prototype in Figma',
   },
   'motion-lab': {
     subtitle: 'Designing a clearer mobile experience for household electricity management',

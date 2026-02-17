@@ -2034,9 +2034,9 @@
   }
 
   .nav-theme-dock--case-study {
-    top: 16px;
+    top: auto;
     right: 16px;
-    bottom: auto;
+    bottom: 16px;
     left: 16px;
     transform: none;
     width: auto;
@@ -2089,7 +2089,7 @@
   .nav-theme-dock--case-study .case-study-back-button,
   .nav-theme-dock--case-study .theme-toggle--case-study {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(6px);
     pointer-events: none;
   }
 
@@ -2135,6 +2135,7 @@
   .floating-nav .floating-nav__link:focus-visible {
     width: 52px;
     min-width: 52px;
+    justify-content: center;
     border: 0;
     border-radius: 999px;
     padding: 8px;
@@ -2151,6 +2152,7 @@
   .floating-nav .floating-nav__link.is-active {
     width: 52px;
     min-width: 52px;
+    justify-content: center;
     border: 1px solid color-mix(in srgb, var(--color-accent-500) 62%, var(--color-border-subtle));
     border-radius: 999px;
     padding: 8px;
@@ -2163,12 +2165,13 @@
   [data-theme='light'] .floating-nav .floating-nav__link.is-active {
     border-color: var(--color-border-subtle);
     background: color-mix(in srgb, var(--color-bg-800) 92%, transparent);
-    color: var(--color-text-primary);
+    color: var(--color-accent-500);
   }
 
   .floating-nav .floating-nav__link.is-mobile-expanded {
     width: 120px;
     min-width: 120px;
+    justify-content: flex-start;
     padding: var(--button-padding-y) var(--button-padding-x);
     gap: 8px;
     overflow: visible;
