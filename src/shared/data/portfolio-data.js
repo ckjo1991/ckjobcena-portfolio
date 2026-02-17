@@ -35,18 +35,18 @@ export const projects = [
   {
     id: 'motion-lab',
     title: 'KuryentePH Concept App',
-    category: 'Category Placeholder',
-    chips: ['Energy Monitoring', 'Concept', 'Mobile'],
-    year: '2026',
-    summary: 'Making electricity consumption easier to track and understand.',
+    category: 'Energy Management Concept',
+    chips: ['Mobile', 'Concept App', 'Energy Monitoring'],
+    year: '2024',
+    summary: 'Mobile concept for monitoring electricity usage, controlling devices, and rewarding savings.',
     variant: 'motion',
-    previewImageSrc: '/KuryentePH.png',
+    previewImageSrc: '/projects/kuryenteph/case-study-cover.png',
     href: '/projects/motion-lab',
   },
   {
     id: 'alliance-link',
     title: 'FAST Concept App',
-    category: 'Category Placeholder',
+    category: 'Transportation UX Concept',
     chips: ['Mobile', 'Concept App', 'Transportation'],
     year: '2025',
     summary: 'Mobile ticketing concept to reduce queues and improve commuter updates.',
@@ -239,295 +239,366 @@ export const projectCaseStudiesById = {
     prototypeLabel: 'View Interactive Prototype',
   },
   'motion-lab': {
-    subtitle: 'Making electricity usage easier to monitor and act on',
+    subtitle: 'Designing a clearer mobile experience for household electricity management',
     summary:
-      'KuryentePH is a concept app that reframes household electricity data into clear trends, alerts, and actionable suggestions. The project focused on reducing interpretation effort so users can quickly understand their usage and make better decisions.',
+      'KuryentePH is an Android app concept developed from August to October 2024 to help users monitor electricity usage, control devices remotely, and make better energy decisions. The work covered research, wireframing, prototyping, and interface design, with the goal of turning complex utility behavior into a routine people can complete with confidence.',
     meta: [
-      { label: 'Role', value: 'UX Designer' },
-      { label: 'Timeline', value: '2026 concept sprint' },
-      { label: 'Scope', value: 'Usage tracking and insight experience' },
+      { label: 'Role', value: 'UI and UX Designer' },
+      { label: 'Timeline', value: 'August to October 2024' },
+      { label: 'Scope', value: 'Android energy management app concept' },
       {
-        label: 'Constraints',
+        label: 'Tools',
         value:
-          'Concept project with no utility backend integration. Data behavior was simulated in prototype scenarios.',
+          'Figma Design, FigJam, and ChatGPT',
       },
       {
         label: 'Goal',
-        value: 'Help users identify high consumption patterns and reduce wasted energy.',
+        value:
+          'Help users monitor usage, control devices, and save electricity through a clear mobile-first flow.',
       },
     ],
     headerMedia: {
       type: 'image',
-      src: '/KuryentePH.png',
-      alt: 'KuryentePH app project preview.',
+      src: '/projects/kuryenteph/case-study-cover.png',
+      alt: 'KuryentePH case study cover.',
     },
     problemSpace: {
-      title: 'Users had data but lacked quick interpretation',
+      title: 'Users needed control, not just monthly bill numbers',
       intro:
-        'Most electricity statements provide numbers but limited guidance. Users struggle to connect spikes in usage with specific household behaviors.',
+        'KuryentePH started from a practical utility challenge: customers needed digital tools to monitor energy consumption, act earlier, and avoid avoidable electricity waste.',
       points: [
-        'Consumption history is hard to compare at a glance',
-        'Alerts are often generic and disconnected from context',
-        'Recommendations are not prioritized by likely impact',
+        'Real-time consumption was not visible in an easy-to-scan mobile flow',
+        'Users lacked clear in-app guidance to turn data into concrete savings actions',
+        'Rewards motivation existed as a product goal but was not integrated into daily monitoring routines',
       ],
       callout:
-        'The product direction prioritized clarity first, then depth for users who wanted to investigate more.',
+        'The opportunity was to combine visibility, control, and rewards in one predictable experience.',
     },
     researchInsights: {
-      title: 'Focused research on decision moments',
+      title: 'Research focused on everyday energy habits',
       intro:
-        'The discovery work centered on when users check bills, what they look for first, and what blocks action.',
+        'Discovery combined lightweight interviews and surveys to understand energy behavior, frustrations, and feature priorities before committing to high-fidelity execution.',
       approach: [
-        'Comparative review of energy tracking interfaces',
-        'Scenario mapping around billing and peak usage moments',
-        'Information hierarchy tests with low fidelity screens',
-        'Iteration walkthroughs based on clarity scoring',
+        'Interviewed potential users about monitoring behavior and electricity pain points',
+        'Collected survey input on alert expectations and preferred app actions',
+        'Mapped core tasks around setup, monitoring, and remote control',
+        'Validated flow clarity through iterative wireframe and prototype walkthroughs',
       ],
       findings: [
-        'Users first seek a simple answer: up or down versus last cycle',
-        'Chart interactions need plain language summaries to be useful',
-        'Action prompts are stronger when tied to a specific pattern',
+        'Users wanted immediate visibility into usage without deep menu navigation',
+        'Remote control was more valuable when paired with live usage context',
+        'Rewards concepts improved motivation, but only when presented simply',
       ],
       coreInsight:
-        'A clear default story with optional detail outperforms dense dashboards in utility contexts.',
+        'Energy management feels manageable when monitoring, control, and motivation are connected in one routine.',
     },
     designExploration: {
-      title: 'Guide users from signal to action',
+      title: 'From exploratory sketches to testable flows',
       guidingQuestion:
-        'How might consumption insights become understandable in under a minute?',
+        'How might KuryentePH make energy tracking and control simple enough for everyday use?',
       sketching: {
         body:
-          'Sketches explored a summary first layout, simplified trend cards, and clear action prompts linked to notable usage events.',
+          'Sketches were used to explore page flow, action hierarchy, and transition clarity before committing to polished layouts.',
         points: [
-          'Prioritize bill cycle summary in the first viewport',
-          'Group trends by impact and confidence',
-          'Link recommendations directly to observed signals',
+          'Tested multiple dashboard entry points for quick monitoring',
+          'Explored placement of device control actions beside usage summaries',
+          'Iterated rewards touchpoints to support engagement without extra noise',
         ],
         media: {
-          type: 'placeholder',
-          label: 'Early sketches and flow explorations',
+          type: 'image',
+          src: '/projects/kuryenteph/sketch-3.png',
+          alt: 'KuryentePH early sketch exploration.',
         },
       },
       wireframes: {
         body:
-          'Wireframes refined data hierarchy, interaction density, and progression from quick scan to deeper analysis.',
+          'Wireframes translated the concept into a clearer structure, helping validate navigation, screen hierarchy, and major interaction checkpoints.',
         media: {
-          type: 'placeholder',
-          label: 'Low fidelity wireframes',
+          type: 'image',
+          src: '/projects/kuryenteph/wireframe.jpg',
+          alt: 'KuryentePH wireframe image.',
         },
       },
       prototyping: {
         body:
-          'Prototype walkthroughs validated readability, touch targets, and whether users could identify next actions without guidance.',
+          'Prototyping combined user journey mapping and interaction walkthroughs to confirm that key tasks could be completed with minimal hesitation.',
         media: {
-          type: 'placeholder',
-          label: 'Interactive prototype walkthrough',
+          type: 'image',
+          src: '/projects/kuryenteph/prototyping.jpg',
+          alt: 'KuryentePH prototyping image.',
         },
       },
     },
     solutionSummary: {
-      title: 'Simplify interpretation and next actions',
+      title: 'A practical electricity-management experience',
       points: [
         {
-          title: 'Clear first scan',
-          description: 'Frontloaded critical comparisons with concise labels and visual cues.',
+          title: 'Real-time usage visibility',
+          description:
+            'Users can quickly check electricity consumption trends through an accessible mobile dashboard.',
         },
         {
-          title: 'Action linked insights',
-          description: 'Connected each anomaly with specific behavior suggestions.',
+          title: 'Remote device control',
+          description:
+            'Core control actions are integrated so users can respond to usage insights immediately.',
         },
         {
-          title: 'Progressive detail',
-          description: 'Kept advanced charts available without overwhelming the default flow.',
+          title: 'Structured navigation and setup',
+          description:
+            'Clear information architecture and setup flow reduce confusion for first-time and repeat usage.',
+        },
+        {
+          title: 'Rewards-ready behavior loop',
+          description:
+            'The experience supports energy-saving motivation by connecting monitoring actions to incentives.',
         },
       ],
     },
     finalDesign: {
-      title: 'Key screens',
+      title: 'High-fidelity screens',
       screens: [
         {
-          label: 'Final screen 1',
-          media: { type: 'image', src: '/KuryentePH.png', alt: 'KuryentePH preview screen 1.' },
+          label: 'Final design 1',
+          media: {
+            type: 'image',
+            src: '/projects/kuryenteph/final-overview.png',
+            alt: 'KuryentePH final design overview.',
+          },
         },
         {
-          label: 'Final screen 2',
-          media: { type: 'image', src: '/KuryentePH.png', alt: 'KuryentePH preview screen 2.' },
+          label: 'Final design 2',
+          media: {
+            type: 'image',
+            src: '/projects/kuryenteph/final-usage-insights.png',
+            alt: 'KuryentePH real-time usage insights screen.',
+          },
         },
         {
-          label: 'Final screen 3',
-          media: { type: 'image', src: '/KuryentePH.png', alt: 'KuryentePH preview screen 3.' },
+          label: 'Final design 3',
+          media: {
+            type: 'image',
+            src: '/projects/kuryenteph/final-remote-control.png',
+            alt: 'KuryentePH remote device control screen.',
+          },
+        },
+        {
+          label: 'Final design 4',
+          media: {
+            type: 'image',
+            src: '/projects/kuryenteph/final-device-setup.png',
+            alt: 'KuryentePH effortless device setup screen.',
+          },
         },
       ],
     },
     outcomes: {
-      title: 'Evaluated through scenario based walkthroughs',
+      title: 'Validated through iterative walkthroughs',
       intro:
-        'Outcomes were measured through guided scenarios and flow comparison against baseline dashboard patterns.',
+        'This concept was evaluated through small-group user testing, scenario walkthroughs, and repeated iteration from low-fidelity to high-fidelity prototypes.',
       points: [
-        { label: 'Faster scan time', description: 'Users identified usage direction with fewer interactions.' },
-        { label: 'Higher confidence', description: 'Users reported stronger understanding of anomaly causes.' },
-        { label: 'Stronger intent', description: 'Users could name a concrete next action more consistently.' },
+        {
+          label: 'Clearer task flow',
+          description: 'Users could move from setup to monitoring with fewer clarification moments.',
+        },
+        {
+          label: 'Improved confidence',
+          description:
+            'Participants reported stronger confidence in understanding app actions and next steps.',
+        },
+        {
+          label: 'Higher engagement potential',
+          description:
+            'Combining monitoring and incentive framing increased interest in ongoing app usage.',
+        },
       ],
       callout:
-        'The concept showed that energy insights become more useful when interpretation friction is reduced early.',
+        'Iterative design and testing helped shape a smoother, more user-friendly utility app concept.',
     },
     reflection: {
-      title: 'Clarity is the main product value',
+      title: 'Daily reliability matters more than feature volume',
       intro:
-        'The project emphasized that utility apps earn trust by reducing ambiguity rather than increasing data density.',
+        'KuryentePH reinforced that utility products succeed when routine actions are short, readable, and dependable.',
       nextSteps: [
-        'Validate recommendations with real meter datasets',
-        'Test long term behavior change and retention',
-        'Explore regional tariff-aware guidance',
+        'Validate the flows with broader household user segments and diverse usage patterns',
+        'Measure long-term engagement impact of rewards-linked monitoring behavior',
+        'Add stronger accessibility and offline-friendly fallback states',
       ],
       note:
-        'The strongest design improvements came from simplifying language and decision paths, not adding more charts.',
+        'The project showed that combining clear IA, real-time visibility, and controllable actions can make energy management feel less overwhelming.',
     },
+    prototypeHref:
+      'https://www.figma.com/proto/lsaNcAqnPNB90B6ZUDWDMo/KuryentePH---Electricity-Management-App?page-id=1%3A20&node-id=40000098-17423&node-type=canvas&viewport=166%2C463%2C0.12&t=BHLU4sGrIqUmeoKq-1&scaling=contain&content-scaling=fixed&starting-point-node-id=40000098%3A17423&show-proto-sidebar=1',
+    prototypeLabel: 'View Interactive Prototype',
   },
   'alliance-link': {
-    subtitle: 'Reducing queue friction in a commuter ticketing flow',
+    subtitle: 'Mobile ticketing and train updates for LRT 2 commuters',
     summary:
-      'FAST is a mobile ticketing concept aimed at making commuting updates and pass purchases faster. The work focused on reliability, clear status communication, and fewer steps in repeat travel scenarios.',
+      'FAST is a mobile app concept for LRT Line 2 that lets commuters purchase tickets anywhere, enter via QR, and receive timely updates for maintenance or emergencies. The concept focused on reducing queue dependency, lowering uncertainty during disruptions, and making repeat commutes faster to complete.',
     meta: [
-      { label: 'Role', value: 'UX Designer' },
-      { label: 'Timeline', value: '2025 concept sprint' },
-      { label: 'Scope', value: 'Mobile ticketing and commute updates' },
-      {
-        label: 'Constraints',
-        value:
-          'Concept exploration with no live transport API integration. Service status and ticket states were simulated.',
-      },
-      {
-        label: 'Goal',
-        value: 'Reduce queue dependence and improve rider confidence before and during travel.',
-      },
+      { label: 'Role', value: 'UI and UX Designer' },
+      { label: 'Timeline', value: 'August 2022 to October 2022' },
+      { label: 'Scope', value: 'Mobile ticketing, service updates, and trip adjustments' },
+      { label: 'Tools', value: 'Figma and FigJam' },
+      { label: 'Goal', value: 'Reduce queue time and improve commuter confidence during disruptions' },
     ],
     headerMedia: {
       type: 'image',
-      src: '/Fast.png',
-      alt: 'FAST ticketing concept app preview.',
+      src: '/projects/fast/case-study-cover.png',
+      alt: 'FAST case study cover showing mobile ticketing and train updates.',
     },
     problemSpace: {
-      title: 'Commuters need certainty, not just ticket purchase',
+      title: 'Commuters lose time and control during peak hours',
       intro:
-        'Ticketing tools often separate purchase, trip status, and station updates, forcing users to jump between screens in high traffic moments.',
+        'Metro Manila commuters rely on LRT 2 daily, but the trip experience is often disrupted by queueing, delayed communication, and limited flexibility once travel plans change.',
       points: [
-        'Ticket purchase can require too many confirmation steps',
-        'Delay updates are hard to spot in the primary flow',
-        'Repeat commute actions are not optimized for speed',
+        'Long queues for physical ticket purchase, especially during rush hour',
+        'Delays and emergencies are often communicated too late',
+        'Last minute trip changes are hard to manage with traditional tickets',
+        'Limited real time support when issues happen',
       ],
       callout:
-        'The target experience prioritized dependable updates and one handed completion under time pressure.',
+        'The core opportunity was to combine faster ticketing with clearer disruption communication in one predictable flow.',
     },
     researchInsights: {
-      title: 'Service confidence drove interface priorities',
+      title: 'Pain-point-led discovery set the product direction',
       intro:
-        'Research centered on when riders feel uncertain and what information improves decision confidence quickly.',
+        'The discovery phase focused on commuter pain points and day to day constraints, then translated them into interface priorities that support speed and confidence.',
       approach: [
-        'Journey map review for peak and off-peak commuting',
-        'Task decomposition for ticket purchase and validation',
-        'Hierarchy tests for delay and platform updates',
-        'Prototype walkthroughs for repeat commute scenarios',
+        'Mapped commuter issues in ticket purchase, updates, and plan adjustments',
+        'Sketched critical paths to reduce decision points in core tasks',
+        'Built information architecture to keep navigation predictable',
+        'Validated flow clarity with wireframe and prototype walkthroughs',
       ],
       findings: [
-        'Riders value clear delay status before payment',
-        'Defaulting to saved routes reduces repeated effort',
-        'Persistent ticket state visibility lowers anxiety at gates',
+        'Commuters value fewer steps in routine purchase tasks over feature depth',
+        'Timely disruption messaging is as important as ticket purchase itself',
+        'Flexible adjustment states reduce stress when plans change mid trip',
       ],
       coreInsight:
-        'Commuter tools perform best when purchase and service confidence are presented as one continuous flow.',
+        'Convenience in transit products comes from predictable, low-friction routines rather than visual novelty.',
     },
     designExploration: {
-      title: 'Support rapid commute decisions end to end',
+      title: 'From sketch to flow architecture to testable screens',
       guidingQuestion:
-        'How might mobile ticketing stay fast while improving trust in live commute status?',
+        'How might commuters buy, adjust, and validate tickets faster while staying informed in real time?',
       sketching: {
         body:
-          'Sketches tested condensed purchase flows, quick rebook states, and integrated status cards near core actions.',
+          'Early sketches were used to validate screen sequence, reduce unnecessary detours, and establish a clear action hierarchy before moving into high-fidelity screens.',
         points: [
-          'Expose service status before purchase commitment',
-          'Speed up repeat ticket purchase with saved commute patterns',
-          'Keep active ticket state visible after payment',
+          'Define a shorter ticket purchase sequence for repeat use',
+          'Position service updates near key travel decisions',
+          'Keep ticket retrieval and validation access visible after payment',
         ],
         media: {
-          type: 'placeholder',
-          label: 'Early sketches and flow explorations',
+          type: 'image',
+          src: '/projects/fast/sketch.png',
+          alt: 'FAST early sketch showing the ticketing flow.',
         },
       },
       wireframes: {
         body:
-          'Wireframes refined button hierarchy, fallback states, and checkpoint messaging for commuters in motion.',
+          'Wireframes and information architecture clarified navigation, checkpoint messaging, and fallback states so commuters could complete tasks with less hesitation.',
         media: {
-          type: 'placeholder',
-          label: 'Low fidelity wireframes',
+          type: 'image',
+          src: '/projects/fast/wireframe-dashboard.png',
+          alt: 'FAST dashboard wireframe.',
         },
       },
       prototyping: {
         body:
-          'Interactive prototypes were used to compare queue replacement paths and communication quality during delay conditions.',
+          'Interactive prototypes were used to test transition clarity and confirm that purchase, updates, and support remained readable in high-pressure commuting contexts.',
         media: {
-          type: 'placeholder',
-          label: 'Interactive prototype walkthrough',
+          type: 'image',
+          src: '/projects/fast/prototype-booking-flow.png',
+          alt: 'FAST booking flow prototype screen.',
         },
       },
     },
     solutionSummary: {
-      title: 'Keep flow short and status obvious',
+      title: 'A digital ticketing and updates hub',
       points: [
         {
-          title: 'Shortened ticket path',
-          description: 'Reduced screens for common purchase tasks and repeated routes.',
+          title: 'In-app ticket purchase with QR entry',
+          description:
+            'Commuters can buy tickets before arriving at the station and enter with a scannable QR code.',
         },
         {
-          title: 'Integrated service context',
-          description: 'Placed delay and platform updates inside the main ticket flow.',
+          title: 'Real-time disruption alerts',
+          description:
+            'Maintenance, emergency, and delay updates are surfaced quickly to support earlier decisions.',
         },
         {
-          title: 'Persistent ticket visibility',
-          description: 'Kept active ticket state easy to retrieve before station entry.',
+          title: 'Flexible travel adjustments',
+          description:
+            'Trips can be adjusted up to one hour before departure to support common schedule changes.',
+        },
+        {
+          title: 'Multiple payment options with live chat support',
+          description:
+            'Payment flexibility and in-moment support reduce friction when unexpected issues occur.',
         },
       ],
     },
     finalDesign: {
-      title: 'Key screens',
+      title: 'High fidelity screens',
       screens: [
         {
-          label: 'Final screen 1',
-          media: { type: 'image', src: '/Fast.png', alt: 'FAST preview screen 1.' },
+          label: 'Final design 1',
+          media: {
+            type: 'image',
+            src: '/projects/fast/final-design-1.png',
+            alt: 'FAST final design screen 1.',
+          },
         },
         {
-          label: 'Final screen 2',
-          media: { type: 'image', src: '/Fast.png', alt: 'FAST preview screen 2.' },
-        },
-        {
-          label: 'Final screen 3',
-          media: { type: 'image', src: '/Fast.png', alt: 'FAST preview screen 3.' },
+          label: 'Final design 2',
+          media: {
+            type: 'image',
+            src: '/projects/fast/final-design-2.png',
+            alt: 'FAST final design screen 2.',
+          },
         },
       ],
     },
     outcomes: {
-      title: 'Evaluated through flow walkthrough comparison',
+      title: 'What success looks like',
       intro:
-        'The concept was evaluated by comparing baseline ticket tasks with redesigned routes across routine and delay scenarios.',
+        'As a concept project, outcomes were evaluated through scenario walkthroughs and flow comparison against traditional station-first ticketing behavior.',
       points: [
-        { label: 'Lower task friction', description: 'Commuters completed core purchase tasks in fewer steps.' },
-        { label: 'Better status awareness', description: 'Users noticed critical updates earlier in the flow.' },
-        { label: 'Improved continuity', description: 'Ticket retrieval felt more consistent after payment.' },
+        {
+          label: 'Reduced queue dependence',
+          description: 'Ticket purchase is shifted off station counters into a mobile-first path.',
+        },
+        {
+          label: 'Earlier disruption awareness',
+          description: 'Timely alerts help commuters react before delays cascade into missed trips.',
+        },
+        {
+          label: 'Less painful travel changes',
+          description: 'Built-in flexibility supports schedule updates without restarting the journey.',
+        },
+        {
+          label: 'In-moment support',
+          description: 'Live chat pathways provide help when issues happen during travel.',
+        },
       ],
       callout:
-        'Results indicated that combining status and purchase context can reduce both delay stress and interaction cost.',
+        'Combining ticketing, status updates, and support in one flow reduced interaction friction and commuter uncertainty.',
     },
     reflection: {
-      title: 'Transit UX depends on confidence loops',
+      title: 'Designing for routine, not novelty',
       intro:
-        'The most valuable improvements came from reducing uncertainty at each stage, not from adding visual complexity.',
+        'FAST reinforced that daily transit experiences improve most when routine actions are shorter, clearer, and easier to recover from when disruptions happen.',
       nextSteps: [
-        'Test with live service interruptions and recovery states',
-        'Measure repeat commute speed against kiosk baselines',
-        'Explore offline fallback for ticket retrieval',
+        'Validate ticket and alert flows with live transport disruptions',
+        'Measure repeat commuter task time versus kiosk-first baselines',
+        'Expand accessibility and offline fallback for ticket retrieval',
       ],
       note:
-        'Reliable status communication and short repeat flows were the strongest levers for commuter trust.',
+        'FAST is a concept project focused on making LRT 2 commuting smoother, safer, and more predictable through digital ticketing and real-time updates.',
     },
+    prototypeHref:
+      'https://www.figma.com/proto/4Iq53MltARwPSCyCkvzPch/FAST-by-CK?page-id=2%3A16&node-id=40000018-2674&node-type=frame&viewport=846%2C1340%2C0.25&t=UmLG4BwcXVR6uAj0-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=40000018%3A2674&show-proto-sidebar=1',
+    prototypeLabel: 'Open Prototype in Figma',
   },
 }

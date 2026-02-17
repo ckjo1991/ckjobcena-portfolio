@@ -34,7 +34,7 @@ clean.
 - Project previews that lead each case-study entry
 - Structured case-study detail pages on `/projects/:projectId` with narrative sections (summary, problem, research, exploration, solution, outcomes, reflection)
 - Project detail pages include a sticky right-side scrollspy section navigation with active-section state and a vertical progress indicator (appears after Project Summary)
-- Layered project preview visuals prepared for optional parallax enhancement
+- Layered project preview visuals with subtle scroll parallax enhancement
 
 ## Out of Scope (Post-MVP)
 
@@ -242,6 +242,7 @@ clean.
 - Active section lock should recover automatically if smooth-scroll navigation is interrupted before target arrival.
 - App shell brand badge uses `public/ck.svg` with yellow token background and no adjacent text label.
 - App shell brand badge should render as a plain icon (no extra border/background container).
+- App shell brand badge should be clickable and return the user to `#hero`.
 - Desktop placement: floating navigation aligns to the right; brand badge is fixed near top-left.
 - Brand badge render size is fixed at `48px x 48px` to match desktop nav-link footprint.
 - Provide a subtle bottom-right CTA to toggle dark/light theme without disrupting primary navigation.
@@ -261,8 +262,8 @@ clean.
 - Use token-derived delay steps for staggered reveals rather than hardcoded millisecond values (compose from duration-only motion tokens).
 - Preferred pattern: section fade + translateY with controlled text
   stagger.
-- Project preview visuals should support optional layered parallax tied to scroll position.
-- If enabled, parallax layers should move at different speeds and stay subtle enough to preserve readability.
+- Project preview visuals should use layered parallax tied to scroll position.
+- Parallax layers should move at different speeds and stay subtle enough to preserve readability.
 - Reduced-motion users should receive static previews without parallax transforms.
 - Theme toggle should preserve contrast and readability in both dark and light modes.
 

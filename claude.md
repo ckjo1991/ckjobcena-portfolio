@@ -23,6 +23,7 @@ MVP scope.
 - Avoid mixing hero layout patterns; use the chosen 7/5 split pattern.
 - Keep brand badge treatment minimal: `ck.svg` in token yellow with no duplicate text label.
 - Keep shell placement consistent: brand icon top-left, floating desktop navigation right-aligned.
+- Brand icon should be clickable and route/scroll to `#hero`.
 - For shell icon sizing, use explicit pixel classes (e.g. `48px`) so token spacing overrides do not distort dimensions.
 - Maintain dual-theme readability: dark is default, light mode is available via subtle bottom-right toggle.
 - Keep nav labels readable; mobile active item must show full label text without clipping.
@@ -39,6 +40,7 @@ MVP scope.
 - Clean Tailwind utility usage
 - Motion consistency via transition tokens only
 - Reveal-delay timing must use duration-only transition tokens for valid CSS delays
+- Project preview parallax should stay subtle and must disable when `prefers-reduced-motion` is enabled
 
 ## File Conventions
 

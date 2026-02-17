@@ -61,8 +61,8 @@ Implementation notes:
 - Use only the transition tokens defined in `prd.md`
 - Keep reveal delay increments token-driven so timing scales from `--transition-fast`
 - Keep project previews layered and motion-ready
-- Defer scroll parallax to Milestone 3 quality pass
-- If parallax is enabled, keep it subtle and disable it when `prefers-reduced-motion` is enabled
+- Apply subtle scroll parallax on project preview visual layers
+- Disable project preview parallax when `prefers-reduced-motion` is enabled
 
 Implementation status:
 - Section reveal and shell entrance animations now consume transition tokens directly.
@@ -79,6 +79,18 @@ Implementation status:
 - Home and project visual UI are extracted under `src/features/`.
 - `/projects/:projectId` now renders a structured long-form case-study layout (top meta grid, problem/insight/exploration/solution/outcomes/reflection sections) while leaving the home preview section unchanged.
 - Case-study detail pages on `/projects/:projectId` now use a sticky right-side scrollspy with active section tracking and vertical progress after the Project Summary section.
+- FAST case-study content now matches Angkas depth by using exported FAST narrative sections, real process/final assets, and a prototype CTA.
+- KuryentePH case-study content now matches Angkas depth by using exported narrative sections, real process/final assets, and a prototype CTA.
+- KuryentePH wireframe and prototyping sections now use JPG process media assets.
+- Case-study media images now open in a modal lightbox preview across case studies (including FAST and KuryentePH), with click-to-zoom and Escape/overlay close support.
+- Project preview cards now include layered scroll parallax motion on visual surfaces, with reduced-motion fallback that keeps the visuals static.
+- Responsive breakpoint refinements are applied across `sm`, `md`, `lg`, and `xl` (card sizing, spacing, and text wrapping behavior).
+- Accessibility pass is applied for navigation/current-location semantics and modal keyboard focus management to support WCAG 2.1 AA baseline behavior.
+- Cross-browser smoke pass is completed via compatibility audit and browser-safe CSS fallbacks (including `-webkit-backdrop-filter`) plus lint/build validation.
+- Motion performance pass is applied by throttling case-study scrollspy updates with `requestAnimationFrame` and limiting `will-change` usage to unrevealed motion states.
+- Navigation interactions are tuned for keyboard/touch by tightening nav transition timing, enlarging touch target sizes, and improving mobile tap hit areas.
+- Brand mark behavior is finalized: the top-left `ck.svg` is clickable and returns to the `#hero` section anchor.
+- Final QA and content polish are completed (including cleanup of placeholder project taxonomy copy).
 
 ## Hero and Case Study Blueprint
 
@@ -146,5 +158,5 @@ Implementation status:
 3. Build four anchored sections on `/` (`hero`, `projects-preview`, `about-preview`, `contact-me`)
 4. Build three case-study preview cards using the preview-first blueprint
 5. Implement fixed icon-first section navigation with responsive adaptation
-6. Add section transitions and complete motion quality pass (including optional parallax)
+6. Add section transitions and complete motion quality pass (including layered parallax tuning)
 7. Run responsive, accessibility, and cross-browser checks

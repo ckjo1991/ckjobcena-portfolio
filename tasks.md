@@ -25,7 +25,11 @@
 - [x] Replace clicked-project detail route with structured long-form case-study pages (without changing the home preview section)
 - [x] Add sticky right-side scrollspy navigation on project detail pages (visible after Project Summary)
 - [x] Add active-section highlighting and vertical progress indicator to case-study scrollspy
-- [ ] Add scroll parallax layers inside project preview visuals
+- [x] Implement full FAST case-study content parity with Angkas (structured copy, exported media assets, and prototype link)
+- [x] Implement full KuryentePH case-study content parity with Angkas (structured copy, exported media assets, and prototype link)
+- [x] Render KuryentePH wireframe and prototyping sections with JPG media assets
+- [x] Add clickable case-study image previews with modal lightbox behavior on all `/projects/:projectId` case studies
+- [x] Add scroll parallax layers inside project preview visuals
 - [x] Apply `public/ck.svg` brand mark in app shell
 - [x] Update `ck.svg` background to token yellow and use icon-only app shell badge
 - [x] Remove app-shell badge wrapper border/background and keep icon-only logo
@@ -47,14 +51,14 @@
 
 ## Milestone 3 Quality
 
-- [ ] Responsive refinement across `sm`, `md`, `lg`, `xl`
-- [ ] Accessibility audit (WCAG 2.1 AA)
-- [ ] Cross-browser smoke tests
-- [ ] Motion performance pass
-- [ ] Verify reduced-motion fallback disables project parallax effects
-- [ ] Tune nav interaction timing and hit areas for keyboard and touch
-- [ ] Decide whether brand mark should be clickable to return to `#hero`
-- [ ] Final QA and content polish
+- [x] Responsive refinement across `sm`, `md`, `lg`, `xl`
+- [x] Accessibility audit (WCAG 2.1 AA)
+- [x] Cross-browser smoke tests
+- [x] Motion performance pass
+- [x] Verify reduced-motion fallback disables project parallax effects
+- [x] Tune nav interaction timing and hit areas for keyboard and touch
+- [x] Decide whether brand mark should be clickable to return to `#hero`
+- [x] Final QA and content polish
 
 ## Dependencies
 

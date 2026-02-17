@@ -9,6 +9,10 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
   hero, projects preview, about preview, and contact.
 - Project detail pages now render a full structured case-study layout after a project preview card click.
 - Project detail pages now include a right-side sticky scrollspy with active-section highlight and vertical progress (appears after Project Summary).
+- FAST (`/projects/alliance-link`) now includes full scannable case-study content, real exported media, and a linked interactive prototype.
+- KuryentePH (`/projects/motion-lab`) now includes full scannable case-study content, real exported media, and a linked interactive prototype.
+- KuryentePH wireframe and prototyping process sections now render JPG media assets.
+- Case-study images on `/projects/:projectId` are now clickable and open in a Mac Preview-style lightbox overlay.
 - Floating section navigation is implemented with active-section tracking.
 - Navigation active state now auto-recovers if smooth-scroll is interrupted before reaching the target section.
 - Reveal stagger delays now use duration-only motion tokens for valid token-driven timing.
@@ -19,8 +23,15 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Brand mark is integrated from `public/ck.svg` as an icon-only shell element.
 - CSS spacing/layout values are normalized to the 8pt scale for component spacing.
 - Section reveal and shell entrance motion timing now uses transition tokens (`--transition-fast/base/slow`).
+- Project preview visuals now include layered scroll parallax motion with reduced-motion fallback.
+- Responsive layout refinements are applied across `sm`, `md`, `lg`, and `xl` breakpoints.
+- Accessibility audit updates are in place (active-nav semantics and keyboard focus management for image preview modal).
+- Cross-browser smoke pass includes compatibility checks and Safari-safe blur fallbacks (`-webkit-backdrop-filter`) with clean lint/build output.
+- Motion performance tuning is in place (`requestAnimationFrame` throttling for scrollspy updates and tighter reveal `will-change` scope).
+- Navigation timing and hit areas are tuned for keyboard/touch (faster nav transitions, larger touch targets, and improved mobile nav tap area sizing).
 - Typography now uses responsive tokens for mobile/tablet/desktop (`h1`, `h2`, `h3`, `body-lg`, `body`, `small`).
 - Hero heading now uses semantic `text-h1` with token-driven scaling across breakpoints.
+- Final QA/content polish pass is complete (including removal of leftover placeholder taxonomy copy).
 - Responsive typography values were tuned for smoother size jumps and better mobile readability.
 
 ## Tech Stack
@@ -84,6 +95,7 @@ SITE_URL=https://your-domain.com npm run sitemap
 - App usage: `src="/ck.svg"`
 - Logo background token: `--color-accent-500` (`#F5C542`)
 - App shell treatment: icon-only mark with no text wrapper
+- Brand mark interaction: clickable shortcut back to `#hero`
 - Render size: `48px x 48px` (`.brand-mark`)
 
 ## Theme Toggle

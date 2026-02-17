@@ -2,11 +2,11 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   ONLINE_RESUME_URL,
-  contactSupportAreas,
   projects,
 } from '../../shared/data/portfolio-data'
+import { usePreviewParallax } from '../../shared/hooks/usePreviewParallax'
 import { useScrollReveal } from '../../shared/hooks/useScrollReveal'
-import { CheckIcon, LinkedInIcon, MailIcon } from '../../shared/ui/icons'
+import { LinkedInIcon, MailIcon } from '../../shared/ui/icons'
 import { revealDelay } from '../../shared/utils/revealDelay'
 import ProjectCardVisual from '../projects/ProjectCardVisual'
 
@@ -38,18 +38,23 @@ function ProjectPlaceholderCard({ project, index, isTapArmed, onTapArm, onTapPro
       <div
         className={`project-placeholder-card__visual ${hasAttachedVisual ? 'project-placeholder-card__visual--image' : ''}`}
         aria-hidden="true"
+        data-preview-parallax
       >
+        <span className="project-placeholder-card__parallax-layer project-placeholder-card__parallax-layer--back" />
+        <div className="project-placeholder-card__parallax-media">
+          {hasAttachedVisual ? (
+            <img
+              src={project.previewImageSrc}
+              alt=""
+              className="project-placeholder-card__custom-image"
+              loading="lazy"
+            />
+          ) : (
+            <ProjectCardVisual variant={project.variant} />
+          )}
+        </div>
+        <span className="project-placeholder-card__parallax-layer project-placeholder-card__parallax-layer--front" />
         {!hasAttachedVisual && <div className="project-placeholder-card__fog" />}
-        {hasAttachedVisual ? (
-          <img
-            src={project.previewImageSrc}
-            alt=""
-            className="project-placeholder-card__custom-image"
-            loading="lazy"
-          />
-        ) : (
-          <ProjectCardVisual variant={project.variant} />
-        )}
       </div>
 
       <div className="project-placeholder-card__content">
@@ -73,7 +78,6 @@ function ProjectPlaceholderCard({ project, index, isTapArmed, onTapArm, onTapPro
 function HomePage() {
   const [armedProjectId, setArmedProjectId] = useState(null)
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false)
-  const [activeSupportAreaIndex, setActiveSupportAreaIndex] = useState(0)
   const armTimeoutRef = useRef(null)
   const homeContentRef = useRef(null)
   const resumeModalRef = useRef(null)
@@ -81,6 +85,7 @@ function HomePage() {
   const resumeModalLastFocusRef = useRef(null)
 
   useScrollReveal(homeContentRef)
+  usePreviewParallax(homeContentRef)
 
   useEffect(() => {
     return () => {
@@ -153,18 +158,6 @@ function HomePage() {
     }
   }, [isResumeModalOpen])
 
-  useEffect(() => {
-    if (contactSupportAreas.length <= 1) return
-
-    const intervalId = window.setInterval(() => {
-      setActiveSupportAreaIndex((currentIndex) => (currentIndex + 1) % contactSupportAreas.length)
-    }, 3500)
-
-    return () => {
-      window.clearInterval(intervalId)
-    }
-  }, [])
-
   const handleProjectTapArm = (projectId) => {
     setArmedProjectId(projectId)
     if (armTimeoutRef.current) {
@@ -183,8 +176,6 @@ function HomePage() {
     }
     setArmedProjectId(null)
   }
-
-  const activeSupportArea = contactSupportAreas[activeSupportAreaIndex]
 
   return (
     <div ref={homeContentRef}>
@@ -254,10 +245,10 @@ function HomePage() {
           >
             <h2 className="text-h2 text-text-primary">About me</h2>
             <p className="max-w-[64ch] text-body-lg text-text-secondary lg:mx-auto lg:max-w-none">
-              <span className="lg:block lg:whitespace-nowrap">
+              <span className="xl:block xl:whitespace-nowrap">
                 I work on messy, real world problems and turn them into clear, usable systems.
               </span>
-              <span className="lg:block lg:whitespace-nowrap">
+              <span className="xl:block xl:whitespace-nowrap">
                 My analytics background helps me measure what works and design with evidence, not
                 guesswork.
               </span>
@@ -295,25 +286,27 @@ function HomePage() {
       </section>
 
       <section id="contact-me" className="home-section contact-section mx-auto max-w-wide py-5">
-        <div className="contact-me-layout grid grid-cols-1 gap-4">
+        <div className="w-full grid grid-cols-1 gap-4">
           <div
             className="contact-primary-card scroll-reveal scroll-reveal--up flex min-h-full flex-col rounded-lg border border-border-subtle bg-surface-700 p-4 md:p-5"
             data-scroll-reveal
           >
-            <h2 className="text-h2 text-text-primary">Contact Me</h2>
-            <div className="mt-2 max-w-[62ch] space-y-2 text-small text-text-secondary">
-              <p>
-                I&apos;m a junior UX designer who enjoys turning messy ideas into clear, usable
-                flows.
-              </p>
-              <p>
-                If you&apos;re working on a product and need help thinking through structure, user
-                journeys, or interface details, feel free to reach out. Share the context and
-                goals so I can understand the full picture.
-              </p>
+            <div className="space-y-stack-sm lg:text-center">
+              <h2 className="text-h2 text-text-primary">Contact Me</h2>
+              <div className="max-w-[64ch] space-y-2 text-small text-text-secondary lg:mx-auto">
+                <p>
+                  I&apos;m a junior UX designer who enjoys turning messy ideas into clear, usable
+                  flows.
+                </p>
+                <p>
+                  If you&apos;re working on a product and need help thinking through structure, user
+                  journeys, or interface details, feel free to reach out. Share the context and
+                  goals so I can understand the full picture.
+                </p>
+              </div>
             </div>
 
-            <div className="mt-stack-sm flex flex-col gap-3 md:mt-stack-sm md:flex-row md:items-center">
+            <div className="mt-stack-sm flex flex-col gap-3 md:flex-row md:items-center lg:justify-center">
               <a
                 className="inline-flex min-h-[var(--button-size-md)] items-center gap-2 rounded-md bg-[var(--color-cta-bg)] px-[var(--button-padding-x)] py-[var(--button-padding-y)] font-medium text-[var(--color-cta-text)] transition-colors duration-base ease-standard hover:bg-[var(--color-cta-hover-bg)]"
                 href="mailto:ckjobcena@gmail.com"
@@ -331,56 +324,12 @@ function HomePage() {
                 rel="noreferrer"
                 aria-label="LinkedIn"
               >
-                <span className="inline-flex h-5 w-5 items-center justify-center">
+                <span className="inline-flex h-4 w-4 items-center justify-center">
                   <LinkedInIcon />
                 </span>
               </a>
             </div>
           </div>
-
-          <aside
-            className="contact-support-card scroll-reveal scroll-reveal--right rounded-lg border border-border-subtle bg-surface-700 px-4 py-3 md:px-5 md:py-3"
-            data-scroll-reveal
-            style={{ '--reveal-delay': revealDelay(1) }}
-          >
-            <h3 className="text-h3 text-text-primary">What I Can Help With</h3>
-            <ul className="mt-4">
-              <li
-                key={activeSupportArea.title}
-                className="contact-support-item flex items-start gap-2 rounded-md border border-border-subtle bg-bg-800 p-3 text-text-secondary"
-              >
-                <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center text-accent-500">
-                  <CheckIcon />
-                </span>
-                <span>
-                  <span className="block font-medium text-text-primary">{activeSupportArea.title}</span>
-                  <span className="block text-[12px]">{activeSupportArea.description}</span>
-                </span>
-              </li>
-            </ul>
-
-            <div className="mt-4 flex items-center gap-2" aria-label="Help topics pagination">
-              {contactSupportAreas.map((item, index) => {
-                const isActive = index === activeSupportAreaIndex
-                return (
-                  <button
-                    key={item.title}
-                    type="button"
-                    className={`h-2 rounded-full transition-all duration-base ease-standard ${
-                      isActive ? 'w-6 bg-accent-500' : 'w-2 bg-border-subtle hover:bg-text-muted'
-                    }`}
-                    onClick={() => setActiveSupportAreaIndex(index)}
-                    aria-label={`Show topic: ${item.title}`}
-                    aria-current={isActive ? 'true' : undefined}
-                  />
-                )
-              })}
-            </div>
-
-            <p className="mt-4 text-small text-text-muted">
-              I typically respond within one to two days.
-            </p>
-          </aside>
         </div>
       </section>
 

@@ -26,6 +26,7 @@ const sectionNavItems = [
 ]
 
 const sectionIds = sectionNavItems.map((item) => item.id)
+const MOBILE_DUPLICATE_PRESS_GUARD_MS = 180
 const caseStudySectionIds = [
   'project-summary',
   'problem-space',
@@ -37,7 +38,7 @@ const caseStudySectionIds = [
   'reflection-next-steps',
 ]
 
-function SectionLink({ sectionId, className, children, onNavigate }) {
+function SectionLink({ sectionId, className, children, onNavigate, isActive = false }) {
   const handleClick = (event) => {
     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
       return
@@ -49,7 +50,12 @@ function SectionLink({ sectionId, className, children, onNavigate }) {
   }
 
   return (
-    <a className={className} href={`/#${sectionId}`} onClick={handleClick}>
+    <a
+      className={className}
+      href={`/#${sectionId}`}
+      onClick={handleClick}
+      aria-current={isActive ? 'location' : undefined}
+    >
       {children}
     </a>
   )
@@ -69,7 +75,7 @@ function FloatingNav({ activeSection }) {
       lastMobilePress.sectionId === sectionId &&
       typeof eventTimeStamp === 'number' &&
       eventTimeStamp >= 0 &&
-      Math.abs(eventTimeStamp - lastMobilePress.timeStamp) < 60
+      Math.abs(eventTimeStamp - lastMobilePress.timeStamp) < MOBILE_DUPLICATE_PRESS_GUARD_MS
 
     if (isDuplicateTap) {
       return
@@ -92,6 +98,7 @@ function FloatingNav({ activeSection }) {
             sectionId={item.id}
             className={`floating-nav__link ${isActive ? 'is-active' : ''} ${isMobileExpanded ? 'is-mobile-expanded' : ''}`}
             onNavigate={handleNavPress}
+            isActive={isActive}
           >
             <span className="floating-nav__icon" aria-hidden="true">
               <Icon solid={isActive} />
@@ -216,7 +223,9 @@ function AppShell({
 
       {!isCaseStudyShell ? (
         <div className="app-shell-brand-row px-3 pt-3 md:px-5 lg:px-6">
-          <img src="/ck.svg" alt="CK logo" className="brand-mark" />
+          <SectionLink sectionId="hero" className="app-shell-brand-row__action" isActive={activeSection === 'hero'}>
+            <img src="/ck.svg" alt="CK logo" className="brand-mark" />
+          </SectionLink>
         </div>
       ) : null}
 
@@ -239,11 +248,53 @@ function SinglePagePortfolio() {
   )
 }
 
-function CaseStudyMedia({ media, className = '' }) {
+function CaseStudyMedia({ media, className = '', onOpenPreview }) {
   if (media?.type === 'image' && media.src) {
+    const isPreviewEnabled = typeof onOpenPreview === 'function'
+    const previewLabel = media.alt ? `Preview image: ${media.alt}` : 'Preview image'
+
+    if (!isPreviewEnabled) {
+      return (
+        <figure className={`case-study-media ${className}`}>
+          <img src={media.src} alt={media.alt ?? ''} loading="lazy" />
+        </figure>
+      )
+    }
+
     return (
       <figure className={`case-study-media ${className}`}>
-        <img src={media.src} alt={media.alt ?? ''} loading="lazy" />
+        <button
+          type="button"
+          className="case-study-media__trigger"
+          onClick={() => onOpenPreview?.(media)}
+          aria-label={previewLabel}
+        >
+          <img src={media.src} alt={media.alt ?? ''} loading="lazy" />
+          <span className="case-study-media__hint" aria-hidden="true">
+            Preview
+          </span>
+        </button>
+      </figure>
+    )
+  }
+
+  if (media?.type === 'pdf' && media.src) {
+    const pdfTitle = media.alt ?? 'PDF preview'
+
+    return (
+      <figure className={`case-study-media ${className}`}>
+        <iframe className="case-study-media__pdf" src={media.src} title={pdfTitle} loading="lazy" />
+        <div className="case-study-media__pdf-link-row">
+          <a
+            href={media.src}
+            target="_blank"
+            rel="noreferrer"
+            className="case-study-media__pdf-link"
+            aria-label={`${pdfTitle} (opens in a new tab)`}
+          >
+            Open PDF
+          </a>
+        </div>
       </figure>
     )
   }
@@ -276,6 +327,12 @@ function ProjectPlaceholderPage() {
   const [activeScrollSpySection, setActiveScrollSpySection] = useState('project-summary')
   const [scrollSpyProgress, setScrollSpyProgress] = useState(0)
   const [showScrollSpy, setShowScrollSpy] = useState(false)
+  const [activeMediaPreview, setActiveMediaPreview] = useState(null)
+  const mediaPreviewRef = useRef(null)
+  const mediaPreviewCloseButtonRef = useRef(null)
+  const mediaPreviewLastFocusRef = useRef(null)
+  const isMediaPreviewOpen =
+    activeMediaPreview?.projectId === projectId && Boolean(activeMediaPreview?.src)
 
   useLayoutEffect(() => {
     sectionRefs.current = {}
@@ -298,15 +355,72 @@ function ProjectPlaceholderPage() {
   useScrollReveal(detailPageRef, projectId)
 
   useEffect(() => {
+    if (!isMediaPreviewOpen) return undefined
+
+    const previousActiveElement =
+      document.activeElement instanceof HTMLElement ? document.activeElement : null
+    mediaPreviewLastFocusRef.current = previousActiveElement
+
+    const focusableSelector =
+      'a[href], button:not([disabled]), textarea:not([disabled]), input:not([disabled]), select:not([disabled]), iframe, [tabindex]:not([tabindex="-1"])'
+    const getFocusableElements = () => {
+      if (!mediaPreviewRef.current) return []
+      return Array.from(mediaPreviewRef.current.querySelectorAll(focusableSelector)).filter(
+        (node) => node instanceof HTMLElement,
+      )
+    }
+
+    const previousOverflow = document.body.style.overflow
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setActiveMediaPreview(null)
+        return
+      }
+
+      if (event.key !== 'Tab') return
+
+      const focusableElements = getFocusableElements()
+      if (!focusableElements.length) {
+        event.preventDefault()
+        return
+      }
+
+      const firstFocusable = focusableElements[0]
+      const lastFocusable = focusableElements[focusableElements.length - 1]
+      const currentFocused = document.activeElement
+
+      if (event.shiftKey && currentFocused === firstFocusable) {
+        event.preventDefault()
+        lastFocusable.focus()
+        return
+      }
+
+      if (!event.shiftKey && currentFocused === lastFocusable) {
+        event.preventDefault()
+        firstFocusable.focus()
+      }
+    }
+
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', onKeyDown)
+    const focusTimer = window.requestAnimationFrame(() => {
+      mediaPreviewCloseButtonRef.current?.focus()
+    })
+
+    return () => {
+      window.cancelAnimationFrame(focusTimer)
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', onKeyDown)
+      mediaPreviewLastFocusRef.current?.focus()
+    }
+  }, [isMediaPreviewOpen])
+
+  useEffect(() => {
+    let rafId = 0
+
     const updateScrollSpyState = () => {
       const activationOffset = Math.max(92, window.innerHeight * 0.28)
       const activationY = window.scrollY + activationOffset
-
-      const summaryNode = sectionRefs.current['project-summary']
-      if (summaryNode) {
-        const isVisible = summaryNode.getBoundingClientRect().bottom <= activationOffset
-        setShowScrollSpy((previousState) => (previousState === isVisible ? previousState : isVisible))
-      }
 
       let nextActiveSection = 'project-summary'
       caseStudySectionIds.forEach((sectionId) => {
@@ -321,6 +435,13 @@ function ProjectPlaceholderPage() {
 
       setActiveScrollSpySection((previousState) =>
         previousState === nextActiveSection ? previousState : nextActiveSection,
+      )
+      const problemSpaceNode = sectionRefs.current['problem-space']
+      const shouldShowScrollSpy = problemSpaceNode
+        ? problemSpaceNode.getBoundingClientRect().top <= activationOffset
+        : window.scrollY > 240
+      setShowScrollSpy((previousState) =>
+        previousState === shouldShowScrollSpy ? previousState : shouldShowScrollSpy,
       )
 
       const firstSectionNode = sectionRefs.current[caseStudySectionIds[0]]
@@ -342,14 +463,24 @@ function ProjectPlaceholderPage() {
       )
     }
 
-    const rafId = window.requestAnimationFrame(updateScrollSpyState)
-    window.addEventListener('scroll', updateScrollSpyState, { passive: true })
-    window.addEventListener('resize', updateScrollSpyState)
+    const scheduleScrollSpyUpdate = () => {
+      if (rafId) return
+      rafId = window.requestAnimationFrame(() => {
+        rafId = 0
+        updateScrollSpyState()
+      })
+    }
+
+    scheduleScrollSpyUpdate()
+    window.addEventListener('scroll', scheduleScrollSpyUpdate, { passive: true })
+    window.addEventListener('resize', scheduleScrollSpyUpdate)
 
     return () => {
-      window.cancelAnimationFrame(rafId)
-      window.removeEventListener('scroll', updateScrollSpyState)
-      window.removeEventListener('resize', updateScrollSpyState)
+      if (rafId) {
+        window.cancelAnimationFrame(rafId)
+      }
+      window.removeEventListener('scroll', scheduleScrollSpyUpdate)
+      window.removeEventListener('resize', scheduleScrollSpyUpdate)
     }
   }, [projectId])
 
@@ -394,6 +525,18 @@ function ProjectPlaceholderPage() {
       sectionNode.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
+  const openMediaPreview = (media) => {
+    if (!media?.src) return
+    setActiveMediaPreview({
+      projectId,
+      src: media.src,
+      alt: media.alt ?? '',
+    })
+  }
+  const previewHandler = openMediaPreview
+  const closeMediaPreview = () => {
+    setActiveMediaPreview(null)
+  }
 
   return (
     <AppShell
@@ -416,7 +559,11 @@ function ProjectPlaceholderPage() {
           <div className="case-study-main-column">
             <h1 className="case-study-title text-h2 text-text-primary">{project.title}</h1>
             <p className="case-study-subtitle text-body-lg text-text-secondary">{detail.subtitle}</p>
-            <CaseStudyMedia media={detail.headerMedia} className="case-study-media--hero" />
+            <CaseStudyMedia
+              media={detail.headerMedia}
+              className="case-study-media--hero"
+              onOpenPreview={previewHandler}
+            />
 
             <CaseStudyDetailSection
               sectionRef={setSectionRef('project-summary')}
@@ -458,6 +605,10 @@ function ProjectPlaceholderPage() {
                   key={item.id}
                   type="button"
                   className={`case-study-scrollspy__item ${isActive ? 'is-active' : ''}`}
+                  aria-label={item.label}
+                  aria-current={isActive ? 'location' : undefined}
+                  title={item.label}
+                  data-label={item.label}
                   onClick={() => handleScrollSpyNavigate(item.id)}
                 >
                   <span className="case-study-scrollspy__dot" aria-hidden="true" />
@@ -520,6 +671,7 @@ function ProjectPlaceholderPage() {
           <CaseStudyMedia
             media={detail.designExploration.sketching.media}
             className="case-study-media--process"
+            onOpenPreview={previewHandler}
           />
           <ul className="case-study-list">
             {detail.designExploration.sketching.points.map((item) => (
@@ -534,6 +686,7 @@ function ProjectPlaceholderPage() {
           <CaseStudyMedia
             media={detail.designExploration.wireframes.media}
             className="case-study-media--process"
+            onOpenPreview={previewHandler}
           />
 
           <h3 className="case-study-subheading text-text-primary">Prototyping</h3>
@@ -543,6 +696,7 @@ function ProjectPlaceholderPage() {
           <CaseStudyMedia
             media={detail.designExploration.prototyping.media}
             className="case-study-media--process"
+            onOpenPreview={previewHandler}
           />
         </CaseStudyDetailSection>
 
@@ -563,7 +717,11 @@ function ProjectPlaceholderPage() {
           <div className="case-study-gallery-grid">
             {detail.finalDesign.screens.map((screen) => (
               <div key={screen.label} className="case-study-gallery-item">
-                <CaseStudyMedia media={screen.media} className="case-study-media--gallery" />
+                <CaseStudyMedia
+                  media={screen.media}
+                  className="case-study-media--gallery"
+                  onOpenPreview={previewHandler}
+                />
               </div>
             ))}
           </div>
@@ -610,6 +768,7 @@ function ProjectPlaceholderPage() {
               target="_blank"
               rel="noreferrer"
               className="project-detail-resource-link inline-flex min-h-[var(--button-size-md)] rounded-md border border-border-subtle bg-surface-700 px-[var(--button-padding-x)] py-[var(--button-padding-y)] text-small text-text-secondary transition-colors duration-base ease-standard hover:border-accent-400 hover:text-text-primary"
+              aria-label={`${detail.prototypeLabel ?? 'View Prototype'} (opens in a new tab)`}
             >
               {detail.prototypeLabel ?? 'View Prototype'}
             </a>
@@ -622,6 +781,30 @@ function ProjectPlaceholderPage() {
             Next Project
           </Link>
         </div>
+
+        {isMediaPreviewOpen ? (
+          <div
+            ref={mediaPreviewRef}
+            className="case-study-preview"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Image preview"
+            onClick={closeMediaPreview}
+          >
+            <button
+              ref={mediaPreviewCloseButtonRef}
+              type="button"
+              className="case-study-preview__close"
+              onClick={closeMediaPreview}
+              aria-label="Close image preview"
+            >
+              Close
+            </button>
+            <figure className="case-study-preview__frame" onClick={(event) => event.stopPropagation()}>
+              <img src={activeMediaPreview?.src} alt={activeMediaPreview?.alt ?? ''} />
+            </figure>
+          </div>
+        ) : null}
       </section>
     </AppShell>
   )
