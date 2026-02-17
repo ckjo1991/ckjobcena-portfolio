@@ -78,6 +78,7 @@ function ProjectPlaceholderCard({ project, index, isTapArmed, onTapArm, onTapPro
 function HomePage() {
   const [armedProjectId, setArmedProjectId] = useState(null)
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false)
+  const [isResumeModalExpanded, setIsResumeModalExpanded] = useState(false)
   const armTimeoutRef = useRef(null)
   const homeContentRef = useRef(null)
   const resumeModalRef = useRef(null)
@@ -155,6 +156,12 @@ function HomePage() {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', onKeyDown)
       resumeModalLastFocusRef.current?.focus()
+    }
+  }, [isResumeModalOpen])
+
+  useEffect(() => {
+    if (!isResumeModalOpen) {
+      setIsResumeModalExpanded(false)
     }
   }, [isResumeModalOpen])
 
@@ -346,17 +353,27 @@ function HomePage() {
             }
           }}
         >
-          <button
-            ref={resumeModalCloseButtonRef}
-            type="button"
-            className="resume-modal__close"
-            onClick={() => setIsResumeModalOpen(false)}
-            aria-label="Close online resume popup"
-          >
-            Close
-          </button>
+          <div className="resume-modal__controls">
+            <button
+              type="button"
+              className="resume-modal__expand"
+              onClick={() => setIsResumeModalExpanded((isExpanded) => !isExpanded)}
+              aria-label={isResumeModalExpanded ? 'Collapse resume viewer' : 'Expand resume viewer'}
+            >
+              {isResumeModalExpanded ? 'Collapse' : 'Expand'}
+            </button>
+            <button
+              ref={resumeModalCloseButtonRef}
+              type="button"
+              className="resume-modal__close"
+              onClick={() => setIsResumeModalOpen(false)}
+              aria-label="Close online resume popup"
+            >
+              Close
+            </button>
+          </div>
           <iframe
-            className="resume-modal__frame"
+            className={`resume-modal__frame ${isResumeModalExpanded ? 'is-expanded' : ''}`}
             src={ONLINE_RESUME_URL}
             title="Online resume"
           />
