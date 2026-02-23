@@ -292,53 +292,54 @@ function HomePage() {
         </div>
       </section>
 
-      <section id="contact-me" className="home-section contact-section mx-auto max-w-wide py-5">
-        <div className="w-full grid grid-cols-1 gap-4">
-          <div
-            className="contact-primary-card scroll-reveal scroll-reveal--up flex min-h-full flex-col rounded-lg border border-border-subtle bg-surface-700 p-4 md:p-5"
-            data-scroll-reveal
-          >
-            <div className="space-y-stack-sm lg:text-center">
-              <h2 className="text-h2 text-text-primary">Contact Me</h2>
-              <div className="max-w-[64ch] space-y-2 text-small text-text-secondary lg:mx-auto">
-                <p>
-                  I&apos;m a junior UX designer who enjoys turning messy ideas into clear, usable
-                  flows.
-                </p>
-                <p>
-                  If you&apos;re working on a product and need help thinking through structure, user
-                  journeys, or interface details, feel free to reach out. Share the context and
-                  goals so I can understand the full picture.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-stack-sm flex flex-col gap-3 md:flex-row md:items-center lg:justify-center">
-              <a
-                className="inline-flex min-h-[var(--button-size-md)] items-center gap-2 rounded-md bg-[var(--color-cta-bg)] px-[var(--button-padding-x)] py-[var(--button-padding-y)] font-medium text-[var(--color-cta-text)] transition-colors duration-base ease-standard hover:bg-[var(--color-cta-hover-bg)]"
-                href="mailto:ckjobcena@gmail.com"
-              >
-                <span className="inline-flex h-4 w-4 items-center justify-center">
-                  <MailIcon />
-                </span>
-                <span>Let&apos;s connect</span>
-              </a>
-
-              <a
-                className="inline-flex h-[var(--button-size-md)] w-[var(--button-size-md)] items-center justify-center rounded-md border border-border-subtle text-text-secondary transition-colors duration-base ease-standard hover:border-accent-500 hover:text-text-primary"
-                href="https://www.linkedin.com/in/ckjobcena/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn"
-              >
-                <span className="inline-flex h-4 w-4 items-center justify-center">
-                  <LinkedInIcon />
-                </span>
-              </a>
-            </div>
-          </div>
+    <section id="contact-me" className="home-section contact-section mx-auto max-w-wide py-5">
+  <div className="w-full grid grid-cols-1 gap-4">
+    <div
+      className="contact-primary-card scroll-reveal scroll-reveal--up flex min-h-full flex-col rounded-lg border border-border-subtle bg-surface-700 p-4 md:p-5"
+      data-scroll-reveal
+    >
+      <div className="space-y-stack-sm lg:text-center">
+        <h2 className="text-h2 text-text-primary">Let&apos;s build something that actually works.</h2>
+        <div className="max-w-[64ch] space-y-2 text-small text-text-secondary lg:mx-auto">
+          <p>
+            I&apos;m a UX Designer with a background in real-time analytics and workforce
+            operations. I design with structure, think in systems, and care about whether
+            decisions hold up under pressure — not just how they look.
+          </p>
+          <p>
+            If you&apos;re working on a product and need someone who can connect design
+            decisions to measurable outcomes, I&apos;m interested in that conversation.
+            Share the problem, the constraints, and the goals. I&apos;ll come prepared.
+          </p>
         </div>
-      </section>
+      </div>
+
+      <div className="mt-stack-sm flex flex-col gap-3 md:flex-row md:items-center lg:justify-center">
+        
+          className="inline-flex min-h-[var(--button-size-md)] items-center gap-2 rounded-md bg-[var(--color-cta-bg)] px-[var(--button-padding-x)] py-[var(--button-padding-y)] font-medium text-[var(--color-cta-text)] transition-colors duration-base ease-standard hover:bg-[var(--color-cta-hover-bg)]"
+          href="mailto:ckjobcena@gmail.com"
+        >
+          <span className="inline-flex h-4 w-4 items-center justify-center">
+            <MailIcon />
+          </span>
+          <span>Let&apos;s connect</span>
+        </a>
+
+        
+          className="inline-flex h-[var(--button-size-md)] w-[var(--button-size-md)] items-center justify-center rounded-md border border-border-subtle text-text-secondary transition-colors duration-base ease-standard hover:border-accent-500 hover:text-text-primary"
+          href="https://www.linkedin.com/in/ckjobcena/"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="LinkedIn"
+        >
+          <span className="inline-flex h-4 w-4 items-center justify-center">
+            <LinkedInIcon />
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
       {isResumeModalOpen && (
         <div
