@@ -63,8 +63,8 @@ export const sandboxProjects = [
     id: 'uxph-classes',
     title: 'UXPH Classes Landing Page',
     description:
-      'Painted door concept to validate demand for community-led design classes among Filipino designers.',
-    tools: ['v0', 'Vercel'],
+      'Painted door test to validate demand for community-led design classes among Filipino designers. Built from a Claude-generated prompt, deployed in one session.',
+    tools: ['Claude', 'v0', 'Fillout', 'Google Sheets', 'Vercel'],
     status: 'live',
     href: 'https://v0-uxph-landing-page.vercel.app/',
   },
@@ -72,9 +72,9 @@ export const sandboxProjects = [
     id: 'graceful',
     title: 'GraceFul',
     description:
-      'Anonymous sharing and prayer app for community support. Built with real-time sync and moderation.',
-    tools: ['Next.js', 'Supabase', 'Vercel'],
-    status: 'wip',
+      'Anonymous sharing and prayer app with real-time sync and community moderation. Built end-to-end using a multi-AI workflow.',
+    tools: ['Claude', 'Codex', 'Gemini', 'ChatGPT', 'Next.js', 'Supabase', 'Vercel'],
+    status: 'live',
     href: 'https://graceful-space.vercel.app',
   },
 ]
