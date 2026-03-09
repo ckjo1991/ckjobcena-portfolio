@@ -29,7 +29,7 @@ export const projects = [
     year: '2022',
     summary: 'Independent redesign focused on faster booking and fewer interaction steps.',
     variant: 'insights',
-    previewImageSrc: '/Angkas.png',
+    previewImageSrc: '/projects/signal-room/cover.png',
     href: '/projects/signal-room',
   },
   {
@@ -51,7 +51,7 @@ export const projects = [
     year: '2025',
     summary: 'Mobile ticketing concept to reduce queues and improve commuter updates.',
     variant: 'partnership',
-    previewImageSrc: '/Fast.png',
+    previewImageSrc: '/projects/alliance-link/cover.png',
     href: '/projects/alliance-link',
   },
 ]
