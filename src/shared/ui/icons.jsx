@@ -134,3 +134,15 @@ export function ThemeMoonIcon() {
     </svg>
   )
 }
+
+export function BeakerIcon({ solid = false }) {
+  return solid ? (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path fillRule="evenodd" d="M10.5 3.75a.75.75 0 0 0-1.5 0V9a.75.75 0 0 1-.082.341L5.25 16.5h13.5l-3.668-7.159A.75.75 0 0 1 15 9V3.75a.75.75 0 0 0-1.5 0V9a2.25 2.25 0 0 0 .25 1.029l3.368 6.571H6.882l3.368-6.571A2.25 2.25 0 0 0 10.5 9V3.75ZM3.75 17.25a.75.75 0 0 0 0 1.5h16.5a.75.75 0 0 0 0-1.5H3.75Z" clipRule="evenodd" />
+    </svg>
+  ) : (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15M14.25 3.104c.251.023.501.05.75.082M19.8 15a2.25 2.25 0 0 1 .45 1.318 2.25 2.25 0 0 1-2.25 2.25H5.25A2.25 2.25 0 0 1 3 16.318a2.25 2.25 0 0 1 .45-1.318L8.25 9" />
+    </svg>
+  )
+}

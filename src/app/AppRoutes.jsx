@@ -10,6 +10,7 @@ import { scrollToSection } from '../shared/navigation/sectionNavigation'
 import {
   AboutIcon,
   BackIcon,
+  BeakerIcon,
   ContactIcon,
   HomeIcon,
   ProjectsIcon,
@@ -22,7 +23,7 @@ import { revealDelay } from '../shared/utils/revealDelay'
 const sectionNavItems = [
   { id: 'hero', label: 'Home', icon: HomeIcon },
   { id: 'projects-preview', label: 'Project', icon: ProjectsIcon },
-  { id: 'sandbox', label: 'Sandbox', icon: ProjectsIcon },
+  { id: 'sandbox', label: 'Sandbox', icon: BeakerIcon },
   { id: 'about-preview', label: 'About', icon: AboutIcon },
   { id: 'contact-me', label: 'Contact', icon: ContactIcon },
 ]
