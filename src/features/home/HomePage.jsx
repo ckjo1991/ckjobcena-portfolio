@@ -96,6 +96,11 @@ function HomePage() {
     }
   }, [])
 
+  const closeResumeModal = () => {
+    setIsResumeModalExpanded(false)
+    setIsResumeModalOpen(false)
+  }
+
   useEffect(() => {
     if (!isResumeModalOpen) return
 
@@ -115,7 +120,7 @@ function HomePage() {
 
     const onKeyDown = (event) => {
       if (event.key === 'Escape') {
-        setIsResumeModalOpen(false)
+        closeResumeModal()
         return
       }
 
@@ -156,12 +161,6 @@ function HomePage() {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', onKeyDown)
       resumeModalLastFocusRef.current?.focus()
-    }
-  }, [isResumeModalOpen])
-
-  useEffect(() => {
-    if (!isResumeModalOpen) {
-      setIsResumeModalExpanded(false)
     }
   }, [isResumeModalOpen])
 
@@ -282,6 +281,7 @@ function HomePage() {
                 href="/resume.html"
                 onClick={(event) => {
                   event.preventDefault()
+                  setIsResumeModalExpanded(false)
                   setIsResumeModalOpen(true)
                 }}
               >
@@ -350,7 +350,7 @@ function HomePage() {
           aria-label="Online resume"
           onClick={(event) => {
             if (event.target === event.currentTarget) {
-              setIsResumeModalOpen(false)
+              closeResumeModal()
             }
           }}
         >
@@ -367,7 +367,7 @@ function HomePage() {
               ref={resumeModalCloseButtonRef}
               type="button"
               className="resume-modal__close"
-              onClick={() => setIsResumeModalOpen(false)}
+              onClick={closeResumeModal}
               aria-label="Close online resume popup"
             >
               Close

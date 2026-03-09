@@ -16,6 +16,7 @@ clear narrative across hero, project preview, about preview, and contact.
 ## Architecture
 
 - React SPA with Vite build tooling
+- Build-time prerender pass for `/` and known case-study routes while keeping client-side routing/hydration
 - React Router with deep linking support
 - Modular component architecture
 - Static content first; data layer is post-MVP
@@ -90,6 +91,8 @@ Implementation status:
 - Motion performance pass is applied by throttling case-study scrollspy updates with `requestAnimationFrame` and limiting `will-change` usage to unrevealed motion states.
 - Navigation interactions are tuned for keyboard/touch by tightening nav transition timing, enlarging touch target sizes, and improving mobile tap hit areas.
 - Brand mark behavior is finalized: the top-left `ck.svg` is clickable and returns to the `#hero` section anchor.
+- Production build now generates prerendered HTML snapshots for `/` and each case-study detail page so bots receive meaningful content without executing JavaScript.
+- Route metadata is centralized in `src/shared/seo/metadata.js` and applied in both prerendered HTML and client-side navigation updates.
 - Final QA and content polish are completed (including cleanup of placeholder project taxonomy copy).
 
 ## Hero and Case Study Blueprint

@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react'
 
-function StartupLoader() {
-  const [visible, setVisible] = useState(true)
+function StartupLoader({ disabled = false }) {
+  const [visible, setVisible] = useState(() => !disabled)
 
   useEffect(() => {
+    if (disabled) {
+      return undefined
+    }
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const minDuration = reduceMotion ? 280 : 1700
     const maxDuration = 3200
@@ -33,7 +37,11 @@ function StartupLoader() {
       window.clearTimeout(fallbackTimer)
       window.removeEventListener('load', onLoad)
     }
-  }, [])
+  }, [disabled])
+
+  if (disabled) {
+    return null
+  }
 
   return (
     <div

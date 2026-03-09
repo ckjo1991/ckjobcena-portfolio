@@ -1,23 +1,14 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { getStaticRoutes, resolveSiteUrl } from '../src/shared/seo/metadata.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const projectRoot = path.resolve(__dirname, '..')
 const publicDir = path.join(projectRoot, 'public')
 
-const siteUrl = (process.env.SITE_URL || process.env.VITE_SITE_URL || 'https://example.com').replace(
-  /\/+$/,
-  '',
-)
-
-const routes = [
-  { path: '/', changefreq: 'weekly', priority: '1.0' },
-  { path: '/resume.html', changefreq: 'monthly', priority: '0.7' },
-  { path: '/projects/signal-room', changefreq: 'monthly', priority: '0.8' },
-  { path: '/projects/motion-lab', changefreq: 'monthly', priority: '0.8' },
-  { path: '/projects/alliance-link', changefreq: 'monthly', priority: '0.8' },
-]
+const siteUrl = resolveSiteUrl()
+const routes = getStaticRoutes()
 
 const lastmod = new Date().toISOString().split('T')[0]
 

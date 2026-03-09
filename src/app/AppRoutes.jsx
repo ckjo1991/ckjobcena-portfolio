@@ -1,9 +1,10 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { Link, Navigate, Route, Routes, useParams } from 'react-router-dom'
+import { Link, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import HomePage from '../features/home/HomePage'
 import { projectCaseStudiesById, projects } from '../shared/data/portfolio-data'
 import { useActiveSection } from '../shared/hooks/useActiveSection'
 import { useScrollReveal } from '../shared/hooks/useScrollReveal'
+import { useDocumentMetadata } from '../shared/seo/useDocumentMetadata'
 import { useThemeMode } from '../shared/hooks/useThemeMode'
 import { scrollToSection } from '../shared/navigation/sectionNavigation'
 import {
@@ -37,6 +38,7 @@ const caseStudySectionIds = [
   'outcomes',
   'reflection-next-steps',
 ]
+const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 function SectionLink({ sectionId, className, children, onNavigate, isActive = false }) {
   const handleClick = (event) => {
@@ -334,7 +336,7 @@ function ProjectPlaceholderPage() {
   const isMediaPreviewOpen =
     activeMediaPreview?.projectId === projectId && Boolean(activeMediaPreview?.src)
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     sectionRefs.current = {}
 
     const root = document.documentElement
@@ -810,10 +812,14 @@ function ProjectPlaceholderPage() {
   )
 }
 
-function AppRoutes() {
+function AppRoutes({ disableStartupLoader = false }) {
+  const location = useLocation()
+
+  useDocumentMetadata(location.pathname)
+
   return (
     <>
-      <StartupLoader />
+      <StartupLoader disabled={disableStartupLoader} />
       <Routes>
         <Route path="/" element={<SinglePagePortfolio />} />
         <Route path="/projects/:projectId" element={<ProjectPlaceholderPage />} />

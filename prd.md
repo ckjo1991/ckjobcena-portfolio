@@ -35,6 +35,7 @@ clean.
 - Structured case-study detail pages on `/projects/:projectId` with narrative sections (summary, problem, research, exploration, solution, outcomes, reflection)
 - Project detail pages include a sticky right-side scrollspy section navigation with active-section state and a vertical progress indicator (appears after Project Summary)
 - Layered project preview visuals with subtle scroll parallax enhancement
+- Build output should prerender `/` and each project detail route into static HTML while preserving the SPA runtime
 
 ## Out of Scope (Post-MVP)
 
@@ -50,6 +51,7 @@ clean.
 - React Router with hash-based section deep linking on `/`
 - Feature-based source organization (`src/app`, `src/features`, `src/shared`, `src/styles`)
 - Semantic HTML and accessible interactions
+- Route-level metadata for home and case-study pages (title, description, canonical, Open Graph, Twitter, JSON-LD)
 - WCAG 2.1 AA baseline
 - 12-column grid discipline for layout
 - Cross-browser smoke checks on current Chrome, Safari, and Firefox

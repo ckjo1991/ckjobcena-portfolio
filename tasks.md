@@ -58,6 +58,9 @@
 - [x] Verify reduced-motion fallback disables project parallax effects
 - [x] Tune nav interaction timing and hit areas for keyboard and touch
 - [x] Decide whether brand mark should be clickable to return to `#hero`
+- [x] Prerender `/` and case-study routes so the initial HTML includes portfolio content before hydration
+- [x] Add route-aware SEO metadata (title, description, canonical, Open Graph, Twitter, JSON-LD)
+- [x] Align generated `robots.txt` and `sitemap.xml` with the production portfolio domain
 - [x] Final QA and content polish
 
 ## Dependencies
