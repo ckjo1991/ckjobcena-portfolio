@@ -57,7 +57,7 @@ function SectionLink({ sectionId, className, children, onNavigate, isActive = fa
       className={className}
       href={`/#${sectionId}`}
       onClick={handleClick}
-      aria-current={isActive ? 'location' : undefined}
+      aria-current={isActive ? 'true' : undefined}
     >
       {children}
     </a>
@@ -322,7 +322,7 @@ function CaseStudyDetailSection({ sectionRef, revealStyle, children }) {
   )
 }
 
-function ProjectPlaceholderPage() {
+function CaseStudyPage() {
   const { projectId } = useParams()
   const project = projects.find((item) => item.id === projectId)
   const detailPageRef = useRef(null)
@@ -814,7 +814,7 @@ function AppRoutes({ disableStartupLoader = false }) {
       <StartupLoader disabled={disableStartupLoader} />
       <Routes>
         <Route path="/" element={<SinglePagePortfolio />} />
-        <Route path="/projects/:projectId" element={<ProjectPlaceholderPage />} />
+        <Route path="/projects/:projectId" element={<CaseStudyPage />} />
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </>

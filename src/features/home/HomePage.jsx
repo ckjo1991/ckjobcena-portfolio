@@ -382,6 +382,17 @@ function HomePage() {
           />
         </div>
       )}
+
+      <div
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+        className="sr-only"
+      >
+        {armedProjectId
+          ? 'Tap again to open the project'
+          : ''}
+      </div>
     </div>
   )
 }
