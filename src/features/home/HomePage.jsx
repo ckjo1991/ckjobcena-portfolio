@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import {
   ONLINE_RESUME_URL,
   projects,
+  sandboxProjects,
 } from '../../shared/data/portfolio-data'
 import { usePreviewParallax } from '../../shared/hooks/usePreviewParallax'
 import { useScrollReveal } from '../../shared/hooks/useScrollReveal'
@@ -72,6 +73,40 @@ function ProjectPlaceholderCard({ project, index, isTapArmed, onTapArm, onTapPro
         </span>
       </div>
     </Link>
+  )
+}
+
+function SandboxCard({ project }) {
+  const isLive = project.status === 'live'
+
+  return (
+    <a
+      href={project.href}
+      target="_blank"
+      rel="noreferrer"
+      className="sandbox-card"
+      aria-label={`${project.title} - opens in a new tab`}
+    >
+      <div className="sandbox-card__header">
+        <span
+          className={`sandbox-card__badge ${isLive ? 'sandbox-card__badge--live' : 'sandbox-card__badge--wip'}`}
+        >
+          {isLive ? 'Live' : 'Work in Progress'}
+        </span>
+      </div>
+      <h3 className="sandbox-card__title">{project.title}</h3>
+      <p className="sandbox-card__description">{project.description}</p>
+      <div className="sandbox-card__tools">
+        {project.tools.map((tool) => (
+          <span key={tool} className="sandbox-card__tool">
+            {tool}
+          </span>
+        ))}
+      </div>
+      <span className="sandbox-card__link" aria-hidden="true">
+        Visit →
+      </span>
+    </a>
   )
 }
 
@@ -240,6 +275,31 @@ function HomePage() {
               isTapArmed={armedProjectId === project.id}
               onTapArm={handleProjectTapArm}
               onTapProceed={handleProjectTapProceed}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section id="sandbox" className="home-section mx-auto max-w-wide py-5">
+        <h2
+          className="mb-stack-xs scroll-reveal scroll-reveal--up text-h2 text-text-primary"
+          data-scroll-reveal
+          style={{ '--reveal-delay': revealDelay(0) }}
+        >
+          Sandbox
+        </h2>
+        <p
+          className="mb-stack-lg max-w-[70ch] scroll-reveal scroll-reveal--up text-body-lg text-text-secondary"
+          data-scroll-reveal
+          style={{ '--reveal-delay': revealDelay(1) }}
+        >
+          Side builds and experiments. Finished, not perfect.
+        </p>
+        <div className="sandbox-grid">
+          {sandboxProjects.map((project) => (
+            <SandboxCard
+              key={project.id}
+              project={project}
             />
           ))}
         </div>

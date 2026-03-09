@@ -22,6 +22,7 @@ import { revealDelay } from '../shared/utils/revealDelay'
 const sectionNavItems = [
   { id: 'hero', label: 'Home', icon: HomeIcon },
   { id: 'projects-preview', label: 'Project', icon: ProjectsIcon },
+  { id: 'sandbox', label: 'Sandbox', icon: ProjectsIcon },
   { id: 'about-preview', label: 'About', icon: AboutIcon },
   { id: 'contact-me', label: 'Contact', icon: ContactIcon },
 ]

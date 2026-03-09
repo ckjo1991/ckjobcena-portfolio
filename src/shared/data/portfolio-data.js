@@ -58,6 +58,27 @@ export const projects = [
   },
 ]
 
+export const sandboxProjects = [
+  {
+    id: 'uxph-classes',
+    title: 'UXPH Classes Landing Page',
+    description:
+      'Painted door concept to validate demand for community-led design classes among Filipino designers.',
+    tools: ['v0', 'Vercel'],
+    status: 'live',
+    href: 'https://v0-uxph-landing-page.vercel.app/',
+  },
+  {
+    id: 'graceful',
+    title: 'GraceFul',
+    description:
+      'Anonymous sharing and prayer app for community support. Built with real-time sync and moderation.',
+    tools: ['Next.js', 'Supabase', 'Vercel'],
+    status: 'wip',
+    href: 'https://graceful-space.vercel.app',
+  },
+]
+
 export const projectCaseStudiesById = {
   'signal-room': {
     subtitle: 'Reducing interaction cost in a time sensitive booking flow',
