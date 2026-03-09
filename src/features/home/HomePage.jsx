@@ -209,6 +209,8 @@ function HomePage() {
             src="/caricature_me_bg_removed.png"
             alt="Caricature portrait of a UX designer surrounded by analytics and design elements."
             loading="eager"
+            width="560"
+            height="560"
           />
         </div>
       </section>

@@ -1,5 +1,7 @@
 export const ONLINE_RESUME_URL = '/resume.html'
 
+const buildProjectHref = (id) => `/projects/${id}`
+
 export const contactSupportAreas = [
   {
     title: 'UX research and journey mapping',
@@ -30,7 +32,7 @@ export const projects = [
     summary: 'Independent redesign focused on faster booking and fewer interaction steps.',
     variant: 'insights',
     previewImageSrc: '/projects/signal-room/cover.png',
-    href: '/projects/signal-room',
+    href: buildProjectHref('signal-room'),
   },
   {
     id: 'motion-lab',
@@ -41,7 +43,7 @@ export const projects = [
     summary: 'Mobile concept for monitoring electricity usage, controlling devices, and rewarding savings.',
     variant: 'motion',
     previewImageSrc: '/projects/kuryenteph/case-study-cover.png',
-    href: '/projects/motion-lab',
+    href: buildProjectHref('motion-lab'),
   },
   {
     id: 'alliance-link',
@@ -52,7 +54,7 @@ export const projects = [
     summary: 'Mobile ticketing concept to reduce queues and improve commuter updates.',
     variant: 'partnership',
     previewImageSrc: '/projects/alliance-link/cover.png',
-    href: '/projects/alliance-link',
+    href: buildProjectHref('alliance-link'),
   },
 ]
 

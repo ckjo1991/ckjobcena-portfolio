@@ -28,16 +28,17 @@ const sectionNavItems = [
 
 const sectionIds = sectionNavItems.map((item) => item.id)
 const MOBILE_DUPLICATE_PRESS_GUARD_MS = 180
-const caseStudySectionIds = [
-  'project-summary',
-  'problem-space',
-  'research-insights',
-  'design-exploration',
-  'solution-summary',
-  'final-design',
-  'outcomes',
-  'reflection-next-steps',
+const CASE_STUDY_SECTIONS = [
+  { id: 'project-summary', label: 'Project Summary' },
+  { id: 'problem-space', label: 'Problem Space' },
+  { id: 'research-insights', label: 'Research and Insights' },
+  { id: 'design-exploration', label: 'Design Exploration' },
+  { id: 'solution-summary', label: 'Solution Summary' },
+  { id: 'final-design', label: 'Final Design' },
+  { id: 'outcomes', label: 'Outcomes' },
+  { id: 'reflection-next-steps', label: 'Reflection and Next Steps' },
 ]
+const caseStudySectionIds = CASE_STUDY_SECTIONS.map((section) => section.id)
 const useIsomorphicLayoutEffect = typeof window === 'undefined' ? useEffect : useLayoutEffect
 
 function SectionLink({ sectionId, className, children, onNavigate, isActive = false }) {
@@ -510,16 +511,7 @@ function ProjectPlaceholderPage() {
 
     delete sectionRefs.current[sectionId]
   }
-  const scrollSpyItems = [
-    { id: 'project-summary', label: 'Project Summary' },
-    { id: 'problem-space', label: 'Problem Space' },
-    { id: 'research-insights', label: 'Research and Insights' },
-    { id: 'design-exploration', label: 'Design Exploration' },
-    { id: 'solution-summary', label: 'Solution Summary' },
-    { id: 'final-design', label: 'Final Design' },
-    { id: 'outcomes', label: 'Outcomes' },
-    { id: 'reflection-next-steps', label: 'Reflection and Next Steps' },
-  ]
+  const scrollSpyItems = CASE_STUDY_SECTIONS
 
   const handleScrollSpyNavigate = (sectionId) => {
     const sectionNode = sectionRefs.current[sectionId]
