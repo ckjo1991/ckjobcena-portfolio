@@ -40,6 +40,7 @@
 - [x] Enforce mobile active-label visibility with explicit display rules to avoid hidden label regressions
 - [x] Fix mobile nav wrapper overflow by unsetting desktop `right` and using content-based wrapper width
 - [x] Add mobile `max-width` guards for nav wrapper/active item and nowrap label to prevent horizontal overflow
+- [x] Keep mobile active nav labels visible and separate the theme toggle from the bottom nav footprint
 - [x] Normalize component spacing/layout values to the 8pt scale
 - [x] Route reveal/shell motion timing through transition tokens (`--transition-fast/base/slow`)
 - [x] Ensure reveal-delay math uses duration-only motion tokens (valid CSS delay values)
@@ -61,6 +62,7 @@
 - [x] Prerender `/` and case-study routes so the initial HTML includes portfolio content before hydration
 - [x] Add route-aware SEO metadata (title, description, canonical, Open Graph, Twitter, JSON-LD)
 - [x] Align generated `robots.txt` and `sitemap.xml` with the production portfolio domain
+- [x] Replace abstract project URLs with readable case-study slugs and preserve legacy redirects
 - [x] Final QA and content polish
 
 ## Dependencies

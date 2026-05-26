@@ -1176,7 +1176,7 @@
 
   .project-detail-page {
     display: grid;
-    gap: 16px;
+    gap: 8px;
   }
 
   .project-detail-back {
@@ -2142,7 +2142,7 @@
 
   .floating-nav {
     position: static;
-    width: min(336px, calc(100vw - 16px));
+    width: min(320px, calc(100vw - 16px));
     max-width: calc(100vw - 16px);
     flex-direction: row;
     justify-content: center;
@@ -2256,12 +2256,12 @@
   .floating-nav .floating-nav__link,
   .floating-nav .floating-nav__link:hover,
   .floating-nav .floating-nav__link:focus-visible {
-    width: 52px;
-    min-width: 52px;
+    width: 38px;
+    min-width: 38px;
     justify-content: center;
     border: 0;
     border-radius: 999px;
-    padding: 8px;
+    padding: 7px;
     background: transparent;
     color: var(--color-text-secondary);
     gap: 0;
@@ -2273,16 +2273,16 @@
   }
 
   .floating-nav .floating-nav__link.is-active {
-    width: 52px;
-    min-width: 52px;
-    justify-content: center;
+    width: 104px;
+    min-width: 104px;
+    justify-content: flex-start;
     border: 1px solid color-mix(in srgb, var(--color-accent-500) 62%, var(--color-border-subtle));
     border-radius: 999px;
-    padding: 8px;
+    padding: 7px;
     background: color-mix(in srgb, var(--color-bg-800) 88%, transparent);
     color: var(--color-accent-500);
-    gap: 0;
-    overflow: hidden;
+    gap: 8px;
+    overflow: visible;
   }
 
   [data-theme='light'] .floating-nav .floating-nav__link.is-active {
@@ -2292,8 +2292,8 @@
   }
 
   .floating-nav .floating-nav__link.is-mobile-expanded {
-    width: 120px;
-    min-width: 120px;
+    width: 104px;
+    min-width: 104px;
     justify-content: flex-start;
     padding: var(--button-padding-y) var(--button-padding-x);
     gap: 8px;
@@ -2309,8 +2309,16 @@
     font-size: var(--text-small);
   }
 
+  .floating-nav .floating-nav__link.is-active .floating-nav__label,
   .floating-nav .floating-nav__link.is-mobile-expanded .floating-nav__label {
     display: inline;
+  }
+
+  .nav-theme-dock:not(.nav-theme-dock--case-study) .theme-toggle {
+    position: fixed;
+    right: 16px;
+    bottom: 80px;
+    pointer-events: auto;
   }
 
   .floating-nav__icon {

@@ -2,6 +2,12 @@ export const ONLINE_RESUME_URL = '/resume.html'
 
 const buildProjectHref = (id) => `/projects/${id}`
 
+export const legacyProjectRouteAliases = {
+  'signal-room': 'angkas',
+  'motion-lab': 'kuryenteph',
+  'alliance-link': 'fast',
+}
+
 export const contactSupportAreas = [
   {
     title: 'UX research and journey mapping',
@@ -24,7 +30,7 @@ export const contactSupportAreas = [
 
 export const projects = [
   {
-    id: 'signal-room',
+    id: 'angkas',
     title: 'Angkas App Redesign',
     category: 'Mobile UX Concept',
     chips: ['Concept', 'Solo', 'UX Design', 'Mobile'],
@@ -32,10 +38,10 @@ export const projects = [
     summary: 'Independent redesign focused on faster booking and fewer interaction steps.',
     variant: 'insights',
     previewImageSrc: '/projects/signal-room/cover.png',
-    href: buildProjectHref('signal-room'),
+    href: buildProjectHref('angkas'),
   },
   {
-    id: 'motion-lab',
+    id: 'kuryenteph',
     title: 'KuryentePH Concept App',
     category: 'Energy Management Concept',
     chips: ['Mobile', 'Concept App', 'Energy Monitoring'],
@@ -43,10 +49,10 @@ export const projects = [
     summary: 'Mobile concept for monitoring electricity usage, controlling devices, and rewarding savings.',
     variant: 'motion',
     previewImageSrc: '/projects/kuryenteph/case-study-cover.png',
-    href: buildProjectHref('motion-lab'),
+    href: buildProjectHref('kuryenteph'),
   },
   {
-    id: 'alliance-link',
+    id: 'fast',
     title: 'FAST Concept App',
     category: 'Transportation UX Concept',
     chips: ['Mobile', 'Concept App', 'Transportation'],
@@ -54,7 +60,7 @@ export const projects = [
     summary: 'Mobile ticketing concept to reduce queues and improve commuter updates.',
     variant: 'partnership',
     previewImageSrc: '/projects/alliance-link/cover.png',
-    href: buildProjectHref('alliance-link'),
+    href: buildProjectHref('fast'),
   },
 ]
 
@@ -80,7 +86,7 @@ export const sandboxProjects = [
 ]
 
 export const projectCaseStudiesById = {
-  'signal-room': {
+  angkas: {
     subtitle: 'Reducing interaction cost in a time sensitive booking flow',
     summary:
       'This independent concept redesign explores how the Angkas booking flow can be made faster and more efficient by reducing interaction cost in critical moments. The focus was not on adding features or visual refresh, but on removing friction that slows users down when requesting a ride under time pressure.',
@@ -261,7 +267,7 @@ export const projectCaseStudiesById = {
       'https://www.figma.com/proto/fsxMk1XgYf1UPaWUBiMHyh/ANGKAS---Redesign?page-id=50%3A485&node-id=50-2149&node-type=frame&viewport=4147%2C3009%2C0.52&t=JmvGrT0Hc9iIlNp2-9&scaling=scale-down&content-scaling=fixed&starting-point-node-id=50%3A2149&show-proto-sidebar=1',
     prototypeLabel: 'Open Prototype in Figma',
   },
-  'motion-lab': {
+  kuryenteph: {
     subtitle: 'Designing a clearer mobile experience for household electricity management',
     summary:
       'KuryentePH is an Android app concept developed from August to October 2024 to help users monitor electricity usage, control devices remotely, and make better energy decisions. The work covered research, wireframing, prototyping, and interface design, with the goal of turning complex utility behavior into a routine people can complete with confidence.',
@@ -453,7 +459,7 @@ export const projectCaseStudiesById = {
       'https://www.figma.com/proto/lsaNcAqnPNB90B6ZUDWDMo/KuryentePH---Electricity-Management-App?page-id=1%3A20&node-id=40000098-17423&node-type=canvas&viewport=166%2C463%2C0.12&t=BHLU4sGrIqUmeoKq-1&scaling=contain&content-scaling=fixed&starting-point-node-id=40000098%3A17423&show-proto-sidebar=1',
     prototypeLabel: 'View Interactive Prototype',
   },
-  'alliance-link': {
+  fast: {
     subtitle: 'Mobile ticketing and train updates for LRT 2 commuters',
     summary:
       'FAST is a mobile app concept for LRT Line 2 that lets commuters purchase tickets anywhere, enter via QR, and receive timely updates for maintenance or emergencies. The concept focused on reducing queue dependency, lowering uncertainty during disruptions, and making repeat commutes faster to complete.',

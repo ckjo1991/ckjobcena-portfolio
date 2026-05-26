@@ -31,6 +31,7 @@ MVP scope.
 - Ensure mobile nav unsets desktop side anchors (`right`) to prevent wrapper clipping/overflow.
 - Add viewport-safe max-width guards for mobile nav wrapper and active chip labels.
 - Ensure nav active-section lock can recover if smooth scrolling is interrupted before reaching the target.
+- Keep public case-study URLs readable (`/projects/angkas`, `/projects/kuryenteph`, `/projects/fast`) while preserving legacy redirects.
 
 ## Code Standards
 

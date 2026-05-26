@@ -1,4 +1,8 @@
-import { projectCaseStudiesById, projects } from '../data/portfolio-data.js'
+import {
+  legacyProjectRouteAliases,
+  projectCaseStudiesById,
+  projects,
+} from '../data/portfolio-data.js'
 
 export const DEFAULT_SITE_URL = 'https://ckjobcena-portfolio.vercel.app'
 const SITE_NAME = 'CK Obcena'
@@ -73,6 +77,14 @@ export function resolveSiteUrl(explicitSiteUrl) {
 }
 
 export function getStaticRoutes() {
+  const legacyProjectRoutes = Object.keys(legacyProjectRouteAliases).map((legacyProjectId) => ({
+    path: `/projects/${legacyProjectId}`,
+    changefreq: 'yearly',
+    priority: '0.1',
+    prerender: true,
+    sitemap: false,
+  }))
+
   return [
     { path: '/', changefreq: 'weekly', priority: '1.0', prerender: true },
     { path: '/resume.html', changefreq: 'monthly', priority: '0.7', prerender: false },
@@ -82,6 +94,7 @@ export function getStaticRoutes() {
       priority: '0.8',
       prerender: true,
     })),
+    ...legacyProjectRoutes,
   ]
 }
 
@@ -99,13 +112,16 @@ export function getRouteMetadata(input = HOME_PATH) {
     }
   }
 
-  const project = projects.find((entry) => entry.href === pathname)
+  const legacyProjectId = pathname.match(/^\/projects\/([^/]+)\/?$/)?.[1]
+  const canonicalProjectId = legacyProjectRouteAliases[legacyProjectId] ?? null
+  const canonicalPath = canonicalProjectId ? `/projects/${canonicalProjectId}` : pathname
+  const project = projects.find((entry) => entry.href === canonicalPath)
   if (project) {
     const detail = projectCaseStudiesById[project.id]
 
     return {
       kind: 'project',
-      path: pathname,
+      path: project.href,
       title: `${project.title} Case Study | ${SITE_NAME}`,
       description: detail?.summary ?? project.summary,
       image: detail?.headerMedia?.src ?? project.previewImageSrc ?? DEFAULT_SOCIAL_IMAGE,

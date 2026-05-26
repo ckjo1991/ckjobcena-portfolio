@@ -1,7 +1,11 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom'
 import HomePage from '../features/home/HomePage'
-import { projectCaseStudiesById, projects } from '../shared/data/portfolio-data'
+import {
+  legacyProjectRouteAliases,
+  projectCaseStudiesById,
+  projects,
+} from '../shared/data/portfolio-data'
 import { useActiveSection } from '../shared/hooks/useActiveSection'
 import { useScrollReveal } from '../shared/hooks/useScrollReveal'
 import { useDocumentMetadata } from '../shared/seo/useDocumentMetadata'
@@ -326,7 +330,8 @@ function CaseStudyDetailSection({ sectionRef, revealStyle, children }) {
 
 function CaseStudyPage() {
   const { projectId } = useParams()
-  const project = projects.find((item) => item.id === projectId)
+  const canonicalProjectId = legacyProjectRouteAliases[projectId] ?? projectId
+  const project = projects.find((item) => item.id === canonicalProjectId)
   const detailPageRef = useRef(null)
   const sectionRefs = useRef({})
   const [activeScrollSpySection, setActiveScrollSpySection] = useState('project-summary')
@@ -488,6 +493,10 @@ function CaseStudyPage() {
       window.removeEventListener('resize', scheduleScrollSpyUpdate)
     }
   }, [projectId])
+
+  if (projectId !== canonicalProjectId) {
+    return <Navigate replace to={`/projects/${canonicalProjectId}`} />
+  }
 
   if (!project) {
     return <Navigate replace to="/" />

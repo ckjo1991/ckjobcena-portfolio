@@ -8,7 +8,7 @@ const projectRoot = path.resolve(__dirname, '..')
 const publicDir = path.join(projectRoot, 'public')
 
 const siteUrl = resolveSiteUrl()
-const routes = getStaticRoutes()
+const routes = getStaticRoutes().filter((route) => route.sitemap !== false)
 
 const lastmod = new Date().toISOString().split('T')[0]
 

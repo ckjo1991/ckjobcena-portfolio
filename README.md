@@ -8,9 +8,10 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - MVP single-page sections implemented on `/`:
   hero, projects preview, about preview, and contact.
 - Project detail pages now render a full structured case-study layout after a project preview card click.
+- Case-study routes now use reviewer-readable slugs (`/projects/angkas`, `/projects/kuryenteph`, `/projects/fast`) with legacy slug redirects preserved.
 - Project detail pages now include a right-side sticky scrollspy with active-section highlight and vertical progress (appears after Project Summary).
-- FAST (`/projects/alliance-link`) now includes full scannable case-study content, real exported media, and a linked interactive prototype.
-- KuryentePH (`/projects/motion-lab`) now includes full scannable case-study content, real exported media, and a linked interactive prototype.
+- FAST (`/projects/fast`) now includes full scannable case-study content, real exported media, and a linked interactive prototype.
+- KuryentePH (`/projects/kuryenteph`) now includes full scannable case-study content, real exported media, and a linked interactive prototype.
 - KuryentePH wireframe and prototyping process sections now render JPG media assets.
 - Case-study images on `/projects/:projectId` are now clickable and open in a Mac Preview-style lightbox overlay.
 - Floating section navigation is implemented with active-section tracking.
@@ -20,6 +21,7 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Theme persistence now fails safely when browser storage is unavailable.
 - Case-study mobile controls now respond correctly when resizing between desktop/mobile breakpoints.
 - Mobile nav label visibility and overflow behavior are stabilized.
+- Mobile active nav labels now stay visible while the theme toggle sits above the bottom nav on narrow viewports.
 - Brand mark is integrated from `public/ck.svg` as an icon-only shell element.
 - CSS spacing/layout values are normalized to the 8pt scale for component spacing.
 - Section reveal and shell entrance motion timing now uses transition tokens (`--transition-fast/base/slow`).
@@ -76,7 +78,10 @@ SITE_URL=https://your-domain.com npm run sitemap
 ## Routes
 
 - `/` (single-page anchored sections)
-- `/projects/:projectId` (structured case-study detail page)
+- `/projects/angkas` (Angkas case study)
+- `/projects/kuryenteph` (KuryentePH case study)
+- `/projects/fast` (FAST case study)
+- `/projects/:projectId` (structured case-study detail page, with legacy slug redirects)
 
 ## SEO Files
 

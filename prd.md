@@ -33,6 +33,7 @@ clean.
 - Navigation links that scroll to section anchors (`#hero`, `#projects-preview`, `#about-preview`, `#contact-me`)
 - Project previews that lead each case-study entry
 - Structured case-study detail pages on `/projects/:projectId` with narrative sections (summary, problem, research, exploration, solution, outcomes, reflection)
+- Public case-study URLs should use readable project slugs: `/projects/angkas`, `/projects/kuryenteph`, and `/projects/fast`
 - Project detail pages include a sticky right-side scrollspy section navigation with active-section state and a vertical progress indicator (appears after Project Summary)
 - Layered project preview visuals with subtle scroll parallax enhancement
 - Build output should prerender `/` and each project detail route into static HTML while preserving the SPA runtime

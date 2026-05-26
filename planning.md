@@ -50,6 +50,9 @@ Implementation notes:
 - `/#projects-preview`
 - `/#about-preview`
 - `/#contact-me`
+- `/projects/angkas`
+- `/projects/kuryenteph`
+- `/projects/fast`
 
 ## Layout and Motion Strategy
 
@@ -80,6 +83,7 @@ Implementation status:
 - Home and project visual UI are extracted under `src/features/`.
 - `/projects/:projectId` now renders a structured long-form case-study layout (top meta grid, problem/insight/exploration/solution/outcomes/reflection sections) while leaving the home preview section unchanged.
 - Case-study detail pages on `/projects/:projectId` now use a sticky right-side scrollspy with active section tracking and vertical progress after the Project Summary section.
+- Case-study detail links now use readable public slugs, while previous abstract slugs redirect to the canonical project URLs.
 - FAST case-study content now matches Angkas depth by using exported FAST narrative sections, real process/final assets, and a prototype CTA.
 - KuryentePH case-study content now matches Angkas depth by using exported narrative sections, real process/final assets, and a prototype CTA.
 - KuryentePH wireframe and prototyping sections now use JPG process media assets.
@@ -115,6 +119,7 @@ Implementation status:
 - Mobile active label visibility is controlled with explicit display toggles for stability across browsers.
 - Mobile nav must reset desktop positional constraints (`right`) so all items remain inside the wrapper.
 - Mobile nav applies viewport-based `max-width` limits to wrapper and active chip to avoid horizontal spill.
+- Mobile theme toggle sits above the bottom nav so the active chip can keep its full label visible.
 - Active section state highlights navigation item.
 - Active section lock from nav taps self-releases if the section is not reached within a short timeout.
 - Active section icon variant is solid; inactive icons remain outline style.
