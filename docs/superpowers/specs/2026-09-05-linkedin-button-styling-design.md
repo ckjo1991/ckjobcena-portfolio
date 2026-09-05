@@ -11,9 +11,12 @@ label and destination.
 - Keep the existing LinkedIn anchor, URL, new-tab behavior, icon, and accessible
   label.
 - Apply the same height, padding, typography, icon sizing, gap, radius, and
-  transition utilities used by the email CTA.
-- Use LinkedIn blue (`#0A66C2`) for the default background, a darker blue for
-  hover, and white text/icon content for contrast.
+  transition utilities used by the email CTA in
+  `src/features/home/HomePage.jsx`.
+- Use LinkedIn blue (`#0A66C2`) for the default background, LinkedIn dark blue
+  (`#004182`) for hover, and white text/icon content for contrast.
+- Preserve the existing focus-visible behavior by retaining the current anchor
+  semantics and transition utilities.
 - Keep the change scoped to the contact CTA styling; no component extraction or
   data-model changes are needed.
 
