@@ -398,7 +398,6 @@ function HomePage() {
     <LinkedInIcon />
   </span>
   <span>Connect on LinkedIn</span>
-</a>
               </a>
             </div>
           </div>
