@@ -384,7 +384,7 @@ function HomePage() {
                 <span className="inline-flex h-4 w-4 items-center justify-center">
                   <MailIcon />
                 </span>
-                <span>Let&apos;s connect</span>
+                <span>Email me</span>
               </a>
 
               <a
@@ -392,7 +392,7 @@ function HomePage() {
                 href="https://www.linkedin.com/in/ckjobcena/"
                 target="_blank"
                 rel="noreferrer"
-                aria-label="LinkedIn"
+                aria-label="Connect on LinkedIn"
               >
                 <span className="inline-flex h-4 w-4 items-center justify-center">
                   <LinkedInIcon />
