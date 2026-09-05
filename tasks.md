@@ -16,6 +16,7 @@
 - [x] Build `#projects-preview` section with three case-study previews
 - [x] Build `#about-preview` section
 - [x] Build `#contact-me` section
+- [x] Match LinkedIn contact CTA formatting to the email CTA with LinkedIn blue styling
 - [x] Add smooth transitions between anchored sections
 - [x] Implement fixed icon-first navigation that expands to icon+label on hover/focus
 - [x] Route nav interactions to section anchors (`#hero`, `#projects-preview`, `#about-preview`, `#contact-me`)

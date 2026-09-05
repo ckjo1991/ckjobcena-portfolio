@@ -80,6 +80,8 @@ clean.
   --color-accent-500: #f5c542;
   --color-accent-600: #e6b532;
   --color-accent-soft-bg: rgba(245, 197, 66, 0.08);
+  --color-linkedin-500: #0a66c2;
+  --color-linkedin-600: #004182;
 
   /* Secondary accents (sparingly) */
   --color-accent-cool: #4f7cac;
@@ -210,6 +212,8 @@ clean.
 - `--color-accent-600` is hover state.
 - `--color-accent-400` is glow/micro-highlight.
 - `--color-accent-soft-bg` is subtle emphasis only.
+- `--color-linkedin-500` is the LinkedIn contact CTA background.
+- `--color-linkedin-600` is the LinkedIn contact CTA hover state.
 - Yellow should not exceed roughly 10 to 15 percent of visible area.
 - Secondary accents are supportive only and must not compete with yellow.
 - Never use spacing values outside the 8pt token scale.

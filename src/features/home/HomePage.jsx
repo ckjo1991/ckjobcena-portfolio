@@ -388,16 +388,16 @@ function HomePage() {
               </a>
 
               <a
-  className="inline-flex h-[var(--button-size-md)] w-auto items-center justify-center gap-2 rounded-md border border-border-subtle px-3 text-text-secondary transition-colors duration-base ease-standard hover:border-accent-500 hover:text-text-primary"
-  href="https://www.linkedin.com/in/ckjobcena/"
-  target="_blank"
-  rel="noreferrer"
-  aria-label="Connect on LinkedIn"
->
-  <span className="inline-flex h-4 w-4 items-center justify-center">
-    <LinkedInIcon />
-  </span>
-  <span>Connect on LinkedIn</span>
+                className="inline-flex min-h-[var(--button-size-md)] items-center gap-2 rounded-md bg-[var(--color-linkedin-500)] px-[var(--button-padding-x)] py-[var(--button-padding-y)] font-medium text-white transition-colors duration-base ease-standard hover:bg-[var(--color-linkedin-600)]"
+                href="https://www.linkedin.com/in/ckjobcena/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Connect on LinkedIn"
+              >
+                <span className="inline-flex h-4 w-4 items-center justify-center">
+                  <LinkedInIcon />
+                </span>
+                <span>Connect on LinkedIn</span>
               </a>
             </div>
           </div>

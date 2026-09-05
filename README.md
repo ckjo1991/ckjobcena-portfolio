@@ -37,6 +37,7 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Route-aware metadata is now generated for `/` and each `/projects/:projectId` page (title, description, canonical, Open Graph, Twitter, and JSON-LD).
 - Final QA/content polish pass is complete (including removal of leftover placeholder taxonomy copy).
 - Responsive typography values were tuned for smoother size jumps and better mobile readability.
+- LinkedIn contact CTA now matches the email CTA format with LinkedIn blue styling.
 
 ## Tech Stack
 
