@@ -79,6 +79,7 @@ Implementation status:
 - Typography tokens now scale across mobile/tablet/desktop breakpoints for headings and body text.
 - Typography scale values are tuned for smoother breakpoint progression and mobile legibility.
 - LinkedIn contact CTA styling mirrors the email CTA while using dedicated LinkedIn blue tokens.
+- The online resume route embeds the shared downloadable PDF to prevent content drift.
 - Route composition is centralized in `src/app/AppRoutes.jsx`.
 - Shared data/hooks/icons are extracted under `src/shared/`.
 - Home and project visual UI are extracted under `src/features/`.

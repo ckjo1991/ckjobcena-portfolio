@@ -39,6 +39,7 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Responsive typography values were tuned for smoother size jumps and better mobile readability.
 - LinkedIn contact CTA now matches the email CTA format with LinkedIn blue styling.
 - The downloadable portfolio resume is sourced from the latest supplied CV PDF.
+- The online resume view embeds the same PDF asset as the download.
 
 ## Tech Stack
 

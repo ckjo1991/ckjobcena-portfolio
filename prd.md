@@ -214,6 +214,7 @@ clean.
 - `--color-accent-soft-bg` is subtle emphasis only.
 - `--color-linkedin-500` is the LinkedIn contact CTA background.
 - `--color-linkedin-600` is the LinkedIn contact CTA hover state.
+- The online resume view and resume download must use the same PDF asset.
 - Yellow should not exceed roughly 10 to 15 percent of visible area.
 - Secondary accents are supportive only and must not compete with yellow.
 - Never use spacing values outside the 8pt token scale.
