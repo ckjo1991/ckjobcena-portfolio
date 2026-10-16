@@ -16,6 +16,8 @@
 - [x] Build `#projects-preview` section with three case-study previews
 - [x] Build `#about-preview` section
 - [x] Build `#contact-me` section
+- [x] Add responsive theme-aware contact form with accessible name, email, optional international phone, country-specific live formatting, and message validation
+- [x] Configure free FormSubmit.co AJAX delivery and disclose provider processing/retention
 - [x] Match LinkedIn contact CTA formatting to the email CTA with LinkedIn blue styling
 - [x] Use the shared resume PDF for both online viewing and download
 - [x] Add smooth transitions between anchored sections
@@ -54,6 +56,8 @@
 
 ## Milestone 3 Quality
 
+- [x] Validate contact form states and keyboard-accessible searchable phone country picker locally
+- [ ] Verify FormSubmit inbox activation and real email delivery after the recipient confirms activation
 - [x] Responsive refinement across `sm`, `md`, `lg`, `xl`
 - [x] Accessibility audit (WCAG 2.1 AA)
 - [x] Cross-browser smoke tests

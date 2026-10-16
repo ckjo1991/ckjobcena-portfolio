@@ -26,7 +26,9 @@ clean.
 - Hero section
 - Project Preview section with three case-study cards
 - About Preview section
-- Contact Me section
+- Contact Me section with a responsive, theme-aware inquiry form
+- Contact form requires a name, valid email address, and message; phone number is optional and uses a searchable international country-code selector defaulting to Philippines (+63), with live format adapting to the selected country
+- Contact form delivers submissions asynchronously to `ckjobcena@gmail.com` via free FormSubmit.co; success UI reflects provider acceptance rather than guaranteed inbox delivery
 - Smooth transitions between sections
 - Responsive behavior that does not break
 - Icon-first navigation that expands from icon-only to icon+label on hover/focus
@@ -59,6 +61,8 @@ clean.
 - `prefers-reduced-motion` handling for all non-essential motion
 - Theme preference persistence must fail safely when storage APIs are unavailable
 - Brand mark served from `public/ck.svg` and reused via `/ck.svg` path
+- Contact form validation and errors meet the WCAG 2.1 AA baseline and use current theme tokens
+- FormSubmit.co processes contact data and retains submissions for 30 days; disclose this and possible anti-spam checks near the form action
 
 ## Design Tokens (Source of Truth)
 

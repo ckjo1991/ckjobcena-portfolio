@@ -38,9 +38,10 @@ form service or server-side submission endpoint in the application.
 2. **Email address** — required. Use an email input and validate its address
    format before submission.
 3. **Phone** — optional. Provide a searchable international country/calling
-   code picker, defaulting to the Philippines (+63). Validate as an
-   international phone number only when a value is supplied. Submit the
-   selected calling code with the phone number.
+   code picker, defaulting to the Philippines (+63). Format the number as the
+   visitor types according to the selected country’s numbering rules, and
+   validate it as an international phone number only when a value is supplied.
+   Submit the normalized international number with its calling code.
 4. **Message** — required.
 
 Validation errors must be associated with their fields and announced
@@ -88,7 +89,7 @@ SMS, OTP, or account verification.
 - Verify name acceptance/rejection cases, valid and malformed email addresses,
   required fields, and optional phone behavior.
 - Verify the phone country search, default country, calling-code submission,
-  and international number validation.
+  country-specific live formatting, and international number validation.
 - Verify pending, provider-accepted, provider-failure, and retry states. The
   UI must distinguish provider acceptance from confirmed inbox delivery.
 - Smoke-test dark and light themes, keyboard navigation/focus, accessible error
