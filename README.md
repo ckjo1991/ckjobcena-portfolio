@@ -16,6 +16,7 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Case-study images on `/projects/:projectId` are now clickable and open in a Mac Preview-style lightbox overlay.
 - Floating section navigation is implemented with active-section tracking.
 - Navigation active state now auto-recovers if smooth-scroll is interrupted before reaching the target section.
+- Active navigation initializes consistently during prerender hydration, then tracks hash-linked sections from scroll position.
 - Reveal stagger delays now use duration-only motion tokens for valid token-driven timing.
 - Light/dark mode toggle is live with persisted preference.
 - Theme persistence now fails safely when browser storage is unavailable.
@@ -38,7 +39,7 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Final QA/content polish pass is complete (including removal of leftover placeholder taxonomy copy).
 - Responsive typography values were tuned for smoother size jumps and better mobile readability.
 - LinkedIn contact CTA now matches the email CTA format with LinkedIn blue styling.
-- Contact section now includes a responsive theme-aware inquiry form with name/email/message validation and an optional searchable international phone field defaulting to Philippines (+63), with country-specific live formatting.
+- Contact section now includes a responsive theme-aware inquiry form with name/email/message validation and an optional international phone field defaulting to Philippines (+63), with country-specific live formatting and a compact digit-length hint.
 - Form submissions are sent asynchronously to `ckjobcena@gmail.com` through FormSubmit.co; the provider must be activated by verifying the inbox before real delivery can be confirmed.
 - Contact form feedback distinguishes provider acceptance from inbox delivery and discloses FormSubmit's 30-day submission retention and anti-spam checks.
 - The downloadable portfolio resume is sourced from the latest supplied CV PDF.
@@ -58,7 +59,7 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - `src/features/`: feature-specific modules (home, project detail, etc.)
 - `src/features/home/ContactSection.jsx`: home-page contact intro and contact links
 - `src/features/home/ContactForm.jsx`: validated contact form and FormSubmit request states
-- `src/features/home/InternationalPhoneField.jsx`: searchable country selector and international number input
+- `src/features/home/InternationalPhoneField.jsx`: country-code selector and international number input with selected-country digit-length hint
 - `src/shared/data/`: shared static portfolio data
 - `src/shared/hooks/`: reusable hooks
 - `src/shared/ui/`: shared icons and UI primitives
@@ -127,7 +128,8 @@ SITE_URL=https://your-domain.com npm run sitemap
 
 - Required: name, email address, and message; optional: phone number.
 - Names accept Unicode letters, spaces, apostrophes, hyphens, and periods; numbers and unrelated symbols are rejected.
-- Phone numbers use a searchable country/calling-code selector with Philippines (+63) as the default, format as the visitor types for the selected country, and are validated only when provided.
+- Phone numbers use a country/calling-code selector with Philippines (+63) as the default, format as the visitor types for the selected country, show a compact typical national-number digit hint, and are validated with full phone-number metadata only when provided.
+- Shared +1 territories show their area-code prefix and subscriber-length guidance while the input still accepts the complete national number.
 - FormSubmit.co asynchronously forwards submissions to `ckjobcena@gmail.com`. Verify the destination inbox with FormSubmit before expecting email delivery.
 - FormSubmit processes submissions, retains them for 30 days, and may show an anti-spam challenge. The portfolio does not store submissions.
 

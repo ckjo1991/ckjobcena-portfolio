@@ -27,12 +27,13 @@ clean.
 - Project Preview section with three case-study cards
 - About Preview section
 - Contact Me section with a responsive, theme-aware inquiry form
-- Contact form requires a name, valid email address, and message; phone number is optional and uses a searchable international country-code selector defaulting to Philippines (+63), with live format adapting to the selected country
+- Contact form requires a name, valid email address, and message; phone number is optional and uses a country-code selector defaulting to Philippines (+63), with live formatting and a compact typical national-number digit hint adapting to the selected country
 - Contact form delivers submissions asynchronously to `ckjobcena@gmail.com` via free FormSubmit.co; success UI reflects provider acceptance rather than guaranteed inbox delivery
 - Smooth transitions between sections
 - Responsive behavior that does not break
 - Icon-first navigation that expands from icon-only to icon+label on hover/focus
 - Navigation links that scroll to section anchors (`#hero`, `#projects-preview`, `#about-preview`, `#contact-me`)
+- Hash-linked section navigation initializes without server/client hydration mismatch
 - Project previews that lead each case-study entry
 - Structured case-study detail pages on `/projects/:projectId` with narrative sections (summary, problem, research, exploration, solution, outcomes, reflection)
 - Public case-study URLs should use readable project slugs: `/projects/angkas`, `/projects/kuryenteph`, and `/projects/fast`

@@ -12,8 +12,8 @@ do not push or deploy without the user's explicit approval.
    - Re-check the current home contact section, token-based form/control styles,
      theme hook, and package manifest.
    - Use `libphonenumber-js` for calling-code data and international number
-     validation; keep the country search control keyboard-operable and
-     accessible within the feature component.
+     validation; keep the country selector accessible and show a concise
+     country-specific digit hint alongside the phone input.
 
 2. **Implement the contact form**
    - Extract the form into a focused feature component under
@@ -24,6 +24,8 @@ do not push or deploy without the user's explicit approval.
    - Validate Unicode names using the approved allowed character set, email
      format, and an entered phone number. Format phone input live according
      to the selected country and submit the normalized international number.
+     Show the selected country-specific typical number length as a compact
+     digit hint on the right and keep libphonenumber validation authoritative.
      Associate all errors with their fields for keyboard and screen-reader
      users.
    - Implement pending, FormSubmit-accepted, provider/network failure, and
@@ -56,8 +58,9 @@ do not push or deploy without the user's explicit approval.
    - Run the existing lint and production build.
    - Exercise accepted/rejected names, malformed/valid emails, missing required
      fields, empty/valid/invalid optional phones, and message validation.
-   - Verify phone-country search, keyboard operation, default country,
-     country-specific live number formatting, theme switching,
+   - Verify the country-code selector, keyboard operation, default country,
+     country-specific live number formatting and digit-length hints (including
+     shared +1 area-code territories), theme switching,
      pending/success/error/retry states, and responsive layouts at the
      defined breakpoints.
    - Test provider response handling without sending real user data; verify

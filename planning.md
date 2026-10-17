@@ -73,6 +73,7 @@ Implementation status:
 - Component spacing/layout values in `src/styles/index.css` are aligned to the 8pt scale.
 - Hero heading sizing now uses typography tokens instead of fixed pixel classes.
 - Active-section lock recovery is implemented to prevent stale nav highlights when smooth scroll is interrupted.
+- Active navigation starts from a server/client-stable initial section, then resolves the current hash target from scroll position after hydration.
 - Reveal delay now composes from duration-only transition tokens for valid CSS delay math.
 - Theme preference persistence now safely degrades when storage access is blocked.
 - Case-study mobile controls now react to viewport breakpoint changes without stale state.
@@ -81,7 +82,7 @@ Implementation status:
 - LinkedIn contact CTA styling mirrors the email CTA while using dedicated LinkedIn blue tokens.
 - The online resume route embeds the shared downloadable PDF to prevent content drift.
 - The contact section includes a responsive form that follows the active theme and preserves the existing `#contact-me` anchor.
-- Contact form validation covers international names, email format, required message content, and optional country-aware phone numbers with selected-country formatting as visitors type.
+- Contact form validation covers international names, email format, required message content, and optional country-aware phone numbers with selected-country formatting and supplied national-length hints as visitors type.
 - FormSubmit.co provides free asynchronous email forwarding to `ckjobcena@gmail.com`; its inbox activation, 30-day retention, and anti-spam challenge are disclosed in the form UX.
 - Route composition is centralized in `src/app/AppRoutes.jsx`.
 - Shared data/hooks/icons are extracted under `src/shared/`.
@@ -135,7 +136,7 @@ Implementation status:
 - `AppShell`: owns floating navigation layout and page padding offsets.
 - `ContactSection`: composes contact introduction, direct email/LinkedIn links, and the inquiry form.
 - `ContactForm`: validates and submits messages through FormSubmit.co, with accessible pending/success/error feedback.
-- `InternationalPhoneField`: provides a searchable keyboard-operable country picker, selected-country live number formatting, and international phone-number validation.
+- `InternationalPhoneField`: provides a keyboard-operable country-code selector, selected-country live number formatting and compact national-length digit hints, and full-metadata international phone-number validation.
 - `ProjectPlaceholderCard`: reusable preview card used in the Project Preview section.
 - `useActiveSection`: tracks visible section for nav highlight state.
 - Case study data shape now includes preview metadata plus full detail-page section content keyed by project id.

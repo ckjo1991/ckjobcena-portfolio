@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { parsePhoneNumberFromString } from 'libphonenumber-js'
+import { parsePhoneNumberFromString } from 'libphonenumber-js/max'
 import InternationalPhoneField from './InternationalPhoneField'
 
 const FORM_SUBMIT_URL = 'https://formsubmit.co/ajax/ckjobcena@gmail.com'

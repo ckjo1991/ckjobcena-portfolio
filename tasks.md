@@ -16,7 +16,7 @@
 - [x] Build `#projects-preview` section with three case-study previews
 - [x] Build `#about-preview` section
 - [x] Build `#contact-me` section
-- [x] Add responsive theme-aware contact form with accessible name, email, optional international phone, country-specific live formatting, and message validation
+- [x] Add responsive theme-aware contact form with accessible name, email, optional international phone, country-specific live formatting and length hints, and message validation
 - [x] Configure free FormSubmit.co AJAX delivery and disclose provider processing/retention
 - [x] Match LinkedIn contact CTA formatting to the email CTA with LinkedIn blue styling
 - [x] Use the shared resume PDF for both online viewing and download
@@ -25,6 +25,7 @@
 - [x] Route nav interactions to section anchors (`#hero`, `#projects-preview`, `#about-preview`, `#contact-me`)
 - [x] Render active nav icons as solid style while keeping inactive icons as outline
 - [x] Prevent stale active-nav state when smooth-scroll is interrupted mid-navigation
+- [x] Keep hash-linked active-nav initialization consistent between prerender and client hydration
 - [x] Implement project preview-first case study layout
 - [x] Replace clicked-project detail route with structured long-form case-study pages (without changing the home preview section)
 - [x] Add sticky right-side scrollspy navigation on project detail pages (visible after Project Summary)
@@ -56,8 +57,8 @@
 
 ## Milestone 3 Quality
 
-- [x] Validate contact form states and keyboard-accessible searchable phone country picker locally
-- [ ] Verify FormSubmit inbox activation and real email delivery after the recipient confirms activation
+- [x] Validate contact form states and keyboard-accessible country-code selector with country-specific digit hints locally
+- [x] Verify FormSubmit inbox activation and real email delivery after the recipient confirms activation
 - [x] Responsive refinement across `sm`, `md`, `lg`, `xl`
 - [x] Accessibility audit (WCAG 2.1 AA)
 - [x] Cross-browser smoke tests
