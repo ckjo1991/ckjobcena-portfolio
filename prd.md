@@ -30,6 +30,7 @@ clean.
 - Contact form requires a name, valid email address, and message; phone number is optional and uses a searchable country-code picker defaulting to Philippines (+63), with live formatting, a consistent "Type phone number here" placeholder, and no national-number length helper
 - The phone country picker uses a five-row searchable dropdown on desktop and a larger searchable bottom sheet on mobile
 - Contact form delivers submissions asynchronously to `ckjobcena@gmail.com` via free FormSubmit.co; success UI reflects provider acceptance rather than guaranteed inbox delivery
+- Contact form fields use one visible accent border for focus with no extra outline; the phone control shows focus on its outer border
 - Smooth transitions between sections
 - Responsive behavior that does not break
 - Icon-first navigation that expands from icon-only to icon+label on hover/focus

@@ -52,6 +52,10 @@ accessibly. The country picker must be keyboard-operable and expose meaningful
 country names and calling codes to assistive technology. Phone is not used for
 SMS, OTP, or account verification.
 
+Contact form fields use a single accent-colored border as the focus indicator,
+without an additional outline. The phone field indicates focus on its outer
+control when either the country-code button or number input has focus.
+
 ### Submission and Privacy
 
 - Send the form asynchronously through FormSubmit.co to
@@ -98,5 +102,7 @@ SMS, OTP, or account verification.
   UI must distinguish provider acceptance from confirmed inbox delivery.
 - Smoke-test dark and light themes, keyboard navigation/focus, accessible error
   announcements, and responsive behavior at the project breakpoints.
+- Verify contact form keyboard focus uses one accent border without double
+  outlines, including focused invalid fields and the phone control.
 - Verify FormSubmit inbox activation and actual delivery with the user before
   treating end-to-end email delivery as complete.

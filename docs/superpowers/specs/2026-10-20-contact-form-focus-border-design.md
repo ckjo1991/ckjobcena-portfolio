@@ -8,14 +8,15 @@ while retaining a clear, accessible focus indicator.
 ## Approved Design
 
 - Use one accent-colored border to indicate focus; do not add an external
-  outline.
+  outline. Apply the border for both pointer and keyboard focus.
 - Apply this treatment consistently to the contact form's text inputs,
   textarea, country search input, and phone field.
 - For the phone field, highlight the outer control border when either the
   country-code button or phone-number input has focus. The inner phone input
   must not draw a second focus border or outline.
 - Keep normal unfocused border styles and existing invalid-state messaging.
-- Preserve visible keyboard focus through the single accent border.
+- Preserve visible focus through the single accent border, including when form
+  validation moves focus programmatically to an invalid field.
 - When an invalid field is focused, keep the accent focus border and retain the
   existing associated error message and invalid accessibility state; the error
   text remains the distinct invalid-state cue rather than adding another border.

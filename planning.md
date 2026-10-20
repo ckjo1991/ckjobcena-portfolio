@@ -83,6 +83,7 @@ Implementation status:
 - The online resume route embeds the shared downloadable PDF to prevent content drift.
 - The contact section includes a responsive form that follows the active theme and preserves the existing `#contact-me` anchor.
 - Contact form validation covers international names, email format, required message content, and optional country-aware phone numbers with selected-country formatting.
+- Contact form controls use a single accent-colored border as the focus indicator for pointer, keyboard, and programmatic focus; the phone control applies it at the outer wrapper.
 - FormSubmit.co provides free asynchronous email forwarding to `ckjobcena@gmail.com`; its inbox activation, 30-day retention, and anti-spam challenge are disclosed in the form UX.
 - Route composition is centralized in `src/app/AppRoutes.jsx`.
 - Shared data/hooks/icons are extracted under `src/shared/`.
@@ -137,6 +138,7 @@ Implementation status:
 - `ContactSection`: composes contact introduction, direct email/LinkedIn links, and the inquiry form.
 - `ContactForm`: validates and submits messages through FormSubmit.co, with accessible pending/success/error feedback.
 - `InternationalPhoneField`: provides a keyboard-operable searchable country-code picker (five-row dropdown on desktop and bottom sheet on mobile), selected-country live number formatting, and full-metadata international phone-number validation.
+- Contact form focus styles avoid nested outlines while preserving visible keyboard focus and existing field error messaging.
 - `ProjectPlaceholderCard`: reusable preview card used in the Project Preview section.
 - `useActiveSection`: tracks visible section for nav highlight state.
 - Case study data shape now includes preview metadata plus full detail-page section content keyed by project id.

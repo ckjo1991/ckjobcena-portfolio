@@ -18,6 +18,7 @@
 - [x] Build `#contact-me` section
 - [x] Add responsive theme-aware contact form with accessible name, email, optional international phone, country-specific live formatting, and message validation
 - [x] Use a consistent phone placeholder and responsive searchable country picker with desktop dropdown and mobile bottom sheet
+- [x] Use a single accent border for focus across contact form fields, including the phone control
 - [x] Configure free FormSubmit.co AJAX delivery and disclose provider processing/retention
 - [x] Match LinkedIn contact CTA formatting to the email CTA with LinkedIn blue styling
 - [x] Use the shared resume PDF for both online viewing and download

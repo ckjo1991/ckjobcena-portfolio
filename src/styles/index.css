@@ -438,13 +438,15 @@
     color: var(--color-text-muted);
   }
 
-  .contact-form__input:focus-visible,
-  .contact-phone__country-button:focus-visible,
-  .contact-phone__input:focus-visible,
-  .contact-phone__search:focus-visible {
+  .contact-form__input:focus,
+  .contact-phone__search:focus {
     border-color: var(--color-accent-500);
-    outline: 2px solid var(--color-accent-500);
-    outline-offset: 2px;
+    outline: none;
+  }
+
+  .contact-phone__country-button:focus-visible,
+  .contact-phone__input:focus-visible {
+    outline: none;
   }
 
   .contact-form__textarea {
@@ -491,7 +493,6 @@
   }
 
   .contact-form__submit:focus-visible,
-  .contact-phone__country-button:focus-visible,
   .contact-phone__country-option:focus-visible {
     outline: 2px solid var(--color-accent-500);
     outline-offset: 2px;

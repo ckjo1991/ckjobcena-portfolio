@@ -42,6 +42,7 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Contact section now includes a responsive theme-aware inquiry form with name/email/message validation and an optional international phone field defaulting to Philippines (+63), with country-specific live formatting and an adaptive searchable country picker.
 - Form submissions are sent asynchronously to `ckjobcena@gmail.com` through FormSubmit.co; the provider must be activated by verifying the inbox before real delivery can be confirmed.
 - Contact form feedback distinguishes provider acceptance from inbox delivery and discloses FormSubmit's 30-day submission retention and anti-spam checks.
+- Contact form focus uses a single accent-colored border without an extra outline, including the grouped phone control.
 - The downloadable portfolio resume is sourced from the latest supplied CV PDF.
 - The online resume view embeds the same PDF asset as the download.
 
@@ -133,6 +134,7 @@ SITE_URL=https://your-domain.com npm run sitemap
 - Shared +1 territories display their territory-specific dialing prefix in the picker; the phone input accepts the complete national number without a length hint.
 - FormSubmit.co asynchronously forwards submissions to `ckjobcena@gmail.com`. Verify the destination inbox with FormSubmit before expecting email delivery.
 - FormSubmit processes submissions, retains them for 30 days, and may show an anti-spam challenge. The portfolio does not store submissions.
+- Focused contact fields show one accent border; the phone control highlights its outer border when the country selector or number input receives focus.
 
 ## Notes
 

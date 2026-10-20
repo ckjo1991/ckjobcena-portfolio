@@ -35,6 +35,8 @@ do not push or deploy without the user's explicit approval.
 3. **Style and integrate**
    - Follow existing color/theme tokens so the form matches the active dark or
      light theme.
+   - Use a single accent-colored border for contact field focus without an
+     extra outline; apply phone focus to the outer grouped control.
    - Use a compact 5/7-style 12-column split on wide layouts and stack the
      intro and form card on narrow viewports.
    - Preserve visible focus, adequate contrast, token spacing, and reduced
@@ -62,6 +64,8 @@ do not push or deploy without the user's explicit approval.
      formatting (including shared +1 area-code territories), theme switching,
      pending/success/error/retry states, and responsive layouts at the
      defined breakpoints.
+   - Verify focused contact fields show one accent border, including invalid
+     fields and both phone-control focus targets, in dark and light themes.
    - Test provider response handling without sending real user data; verify
      actual inbox delivery only after the user activates FormSubmit.
    - Do not push or deploy until the user explicitly approves.
