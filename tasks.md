@@ -13,6 +13,8 @@
 ## Milestone 2 MVP Build
 
 - [x] Build `#hero` section with strong motion
+- [x] Make CK Obcena visible in the hero and connect the original analytics headline to CV-backed UX experience
+- [x] Increase desktop hero portrait height and show the full image while preserving its current mobile-hidden breakpoint
 - [x] Build `#projects-preview` section with three case-study previews
 - [x] Build `#about-preview` section
 - [x] Build `#contact-me` section

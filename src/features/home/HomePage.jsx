@@ -226,11 +226,14 @@ function HomePage() {
           data-scroll-reveal
           style={{ '--reveal-delay': revealDelay(1) }}
         >
+          <p className="text-small font-semibold uppercase tracking-wide text-accent-400">
+            CK Obcena · UX Designer
+          </p>
           <h1 className="text-h1 text-text-primary">
             UX Designer With An Analytics Background
           </h1>
           <p className="max-w-[52ch] text-body-lg text-text-secondary">
-            I Turn Messy Workflows Into Clear, Measurable Products.
+            I bring nearly 8 years in real-time analysis and reporting to UX—using data to find root causes and design clearer digital experiences.
           </p>
         </div>
 
@@ -245,7 +248,7 @@ function HomePage() {
             alt="Caricature portrait of a UX designer surrounded by analytics and design elements."
             loading="eager"
             width="560"
-            height="560"
+            height="643"
           />
         </div>
       </section>

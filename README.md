@@ -7,6 +7,8 @@ Token-driven portfolio app built with React, Vite, Tailwind, and React Router.
 - Foundation setup complete: Vite baseline, Tailwind config, token mapping, and routing.
 - MVP single-page sections implemented on `/`:
   hero, projects preview, about preview, and contact.
+- Home hero now identifies CK Obcena, retains the original UX/analytics headline, and explains how nearly eight years in real-time analysis and reporting inform the UX practice.
+- Desktop hero portrait now uses a taller, full-image fit; the image remains hidden below the existing mobile breakpoint.
 - Project detail pages now render a full structured case-study layout after a project preview card click.
 - Case-study routes now use reviewer-readable slugs (`/projects/angkas`, `/projects/kuryenteph`, `/projects/fast`) with legacy slug redirects preserved.
 - Project detail pages now include a right-side sticky scrollspy with active-section highlight and vertical progress (appears after Project Summary).

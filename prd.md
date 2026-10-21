@@ -24,6 +24,8 @@ clean.
 ## MVP Scope
 
 - Hero section
+- The hero retains the headline “UX Designer With An Analytics Background,” displays “CK Obcena · UX Designer,” and explains how nearly eight years of real-time analysis and reporting inform the user's UX practice
+- Desktop hero portrait uses a taller, non-cropped presentation; preserve the existing breakpoint where the image is hidden on mobile
 - Project Preview section with three case-study cards
 - About Preview section
 - Contact Me section with a responsive, theme-aware inquiry form

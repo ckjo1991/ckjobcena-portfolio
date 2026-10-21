@@ -1201,12 +1201,11 @@
   }
 
   .hero-image {
-    width: 140%;
-    height: 140%;
-    object-fit: cover;
-    object-position: 50% 45%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
     filter: brightness(1.15) contrast(1.05) saturate(1.1);
-    transform: scale(1.25);
     transition: filter var(--transition-base);
   }
 
@@ -3034,9 +3033,9 @@
   }
 
   .hero-image-container {
-    height: clamp(464px, 34vw, 560px);
-    min-height: clamp(464px, 34vw, 560px);
-    max-height: 560px;
+    height: clamp(496px, 38vw, 608px);
+    min-height: clamp(496px, 38vw, 608px);
+    max-height: 608px;
   }
 
   .project-placeholder-grid {

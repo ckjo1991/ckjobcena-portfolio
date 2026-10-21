@@ -72,6 +72,8 @@ Implementation status:
 - Section reveal and shell entrance animations now consume transition tokens directly.
 - Component spacing/layout values in `src/styles/index.css` are aligned to the 8pt scale.
 - Hero heading sizing now uses typography tokens instead of fixed pixel classes.
+- The home hero identifies CK Obcena, retains the original analytics headline, and explains how nearly eight years in real-time analysis and reporting inform UX design.
+- The desktop hero portrait uses a taller container and full-image fitting; it remains hidden below the existing mobile breakpoint.
 - Active-section lock recovery is implemented to prevent stale nav highlights when smooth scroll is interrupted.
 - Active navigation starts from a server/client-stable initial section, then resolves the current hash target from scroll position after hydration.
 - Reveal delay now composes from duration-only transition tokens for valid CSS delay math.
